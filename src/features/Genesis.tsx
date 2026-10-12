@@ -18,9 +18,7 @@ export default function Genesis() {
               </div>
               <Portrait index={index} />
               <figcaption>
-                <strong>
-                  {['The Watcher', 'The Keeper', 'The Seeker'][position]}
-                </strong>
+                <strong>{['Watcher', 'Keeper', 'Seeker'][position]}</strong>
                 <span>CONCEPT ART</span>
               </figcaption>
             </figure>
