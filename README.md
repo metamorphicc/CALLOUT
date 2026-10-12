@@ -21,6 +21,7 @@ The development server runs at http://127.0.0.1:5173. Environment variables are 
 
 ```powershell
 npm run check
+npm test
 npm run build
 npm run preview
 ```
@@ -34,6 +35,17 @@ The build output is written to `dist/`. The preview server runs at http://127.0.
 - `src/features/marked-ones/`: caller types, source metadata, and leaderboard snapshots.
 - `src/styles/global.css` and `tokens.css`: layout styles and shared design tokens.
 - `src/App.tsx`: the page entry point.
+- `src/components/`: navigation, the pixel mark, avatars, and motion wrappers.
+- `src/features/`: Hero, the rewards leaderboard, Lore, token status, Genesis previews, and the nomination desk.
+- `tests/nomination.test.mjs`: input validation and evidence-link tests using Node's test runner.
+- `docs/artwork.md`: image generation prompt and asset provenance.
+- `docs/verification.md`: validation results and known launch dependencies.
+
+## Implemented experience
+
+The site includes all six sections, five caller statistics dialogs, a mobile navigation menu, finite hero and scroll animations, and support for reduced-motion preferences. Fonts and the character atlas are hosted with the application. All website text and project documentation are in English.
+
+The nomination form validates the Twitter handle and up to five original callout links, then downloads a JSON draft to the visitor's device. It does not submit the nomination to a server. The form explicitly communicates that submissions are not open yet.
 
 ## Public configuration
 
@@ -42,6 +54,8 @@ Variables prefixed with `VITE_` are embedded in the browser bundle. Use them onl
 The first five callers were transcribed from the image in [Alon's source post](https://x.com/a1lon9/status/2108618810420846647). This is a rewards leaderboard snapshot, not an independent audit of signal quality. Exact Twitter handles, the reward period, and the payout asset are unconfirmed. The source excludes callouts above $500 million from its last-100-callouts statistics. Order titles and illustrated avatars are creative elements of this project, separate from the source ranking.
 
 Token supply, allocation, and contract address have not been provided. The Genesis Collection is Coming Soon. No wallet connection, token transactions, NFT mint, or ownership verification is implemented.
+
+The HTML retains `noindex, nofollow` while the site is awaiting launch information. Set the official project links and contract values, add production canonical/share metadata, and review this directive before public launch.
 
 ## Git workflow
 
