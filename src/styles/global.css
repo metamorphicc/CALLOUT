@@ -237,7 +237,7 @@ p {
 .hero h1 {
   margin-block: var(--space-lg);
   font-size: var(--text-title);
-  line-height: 0.91;
+  line-height: 1.01;
   letter-spacing: -0.015em;
 }
 .hero h1 > span {
@@ -885,7 +885,7 @@ p {
   align-items: center;
   justify-content: space-between;
   padding: var(--space-xs);
-  font-size: 0.5rem;
+  font-size: 0.625rem;
   letter-spacing: 0.08em;
 }
 .nft-piece figcaption {
@@ -903,7 +903,7 @@ p {
   line-height: 1;
 }
 .nft-piece figcaption > span {
-  font-size: 0.5rem;
+  font-size: 0.625rem;
   letter-spacing: 0.04em;
   color: var(--color-muted);
 }
@@ -1338,8 +1338,8 @@ p {
   }
   .hero-lineup {
     bottom: 50px;
-    width: 126%;
-    left: -13%;
+    width: 108%;
+    left: -6%;
   }
   .scene-caption {
     bottom: 55px;
@@ -1358,5 +1358,27 @@ p {
   }
   .signal-strip span:nth-child(2) {
     display: flex;
+  }
+}
+
+@media (max-width: 39.99rem) {
+  .hero-actions {
+    gap: var(--space-sm) var(--space-lg);
+  }
+  .dialog-content {
+    padding: var(--space-lg);
+  }
+  .dialog-identity {
+    gap: var(--space-sm);
+  }
+  .dialog-identity .portrait {
+    width: 72px;
+  }
+  .dialog-identity h2 {
+    font-size: 1.5rem;
+  }
+  .order-title small {
+    display: block;
+    margin-left: 0;
   }
 }

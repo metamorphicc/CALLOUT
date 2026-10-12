@@ -21,7 +21,7 @@ export default function Genesis() {
                 <strong>
                   {['The Watcher', 'The Keeper', 'The Seeker'][position]}
                 </strong>
-                <span>CONCEPT PORTRAIT</span>
+                <span>CONCEPT ART</span>
               </figcaption>
             </figure>
           ))}
