@@ -843,6 +843,115 @@ p {
   flex: 1;
   gap: var(--space-sm);
 }
+
+.genesis-section {
+  background: var(--color-background);
+  color: var(--color-text);
+  padding-bottom: var(--space-4xl);
+}
+.genesis-grid {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-xl);
+}
+.genesis-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-xs);
+  align-items: center;
+  position: relative;
+  padding-top: var(--space-lg);
+}
+.nft-piece {
+  margin: 0;
+  border: 1px solid var(--color-text);
+  background: var(--color-mint);
+  color: var(--color-text);
+  position: relative;
+}
+.nft-piece--0 {
+  transform: rotate(-6deg) translateY(10px);
+}
+.nft-piece--1 {
+  transform: translateY(-8px);
+  z-index: 1;
+  background: var(--color-paper);
+}
+.nft-piece--2 {
+  transform: rotate(6deg) translateY(10px);
+}
+.nft-piece-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-xs);
+  font-size: 0.5rem;
+  letter-spacing: 0.08em;
+}
+.nft-piece figcaption {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-xs);
+  background: var(--color-paper);
+  color: var(--color-text);
+  gap: 4px;
+}
+.nft-piece figcaption > strong {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1;
+}
+.nft-piece figcaption > span {
+  font-size: 0.5rem;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+.coming-soon {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  border: 1px solid var(--color-rule);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--text-label);
+  color: var(--color-accent);
+  letter-spacing: 0.07em;
+}
+.collection-note {
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  color: var(--color-muted);
+  font-size: var(--text-small);
+}
+@media (min-width: 40rem) {
+  .genesis-gallery {
+    gap: var(--space-lg);
+  }
+  .nft-piece-top,
+  .nft-piece figcaption {
+    padding: var(--space-sm);
+  }
+  .nft-piece-top {
+    font-size: 0.625rem;
+  }
+  .nft-piece figcaption > strong {
+    font-size: 1.5rem;
+  }
+  .nft-piece figcaption > span {
+    font-size: 0.625rem;
+  }
+}
+@media (min-width: 60rem) {
+  .genesis-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+  .genesis-gallery {
+    gap: var(--space-sm);
+  }
+}
 @media (min-width: 60rem) {
   .token-grid {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);

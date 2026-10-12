@@ -3,6 +3,7 @@ import Hero from './features/Hero'
 import MarkedOnes from './features/marked-ones/MarkedOnes'
 import Lore from './features/Lore'
 import Token from './features/Token'
+import Genesis from './features/Genesis'
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <MarkedOnes />
         <Lore />
         <Token />
+        <Genesis />
       </main>
     </>
   )
