@@ -4,6 +4,8 @@ import MarkedOnes from './features/marked-ones/MarkedOnes'
 import Lore from './features/Lore'
 import Token from './features/Token'
 import Genesis from './features/Genesis'
+import Join from './features/Join'
+import Footer from './components/Footer'
 
 export default function App() {
   return (
@@ -18,7 +20,9 @@ export default function App() {
         <Lore />
         <Token />
         <Genesis />
+        <Join />
       </main>
+      <Footer />
     </>
   )
 }
