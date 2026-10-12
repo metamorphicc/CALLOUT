@@ -8,6 +8,9 @@ import { validateNomination } from './nomination'
 export default function Join() {
   const [error, setError] = useState('')
   const [saved, setSaved] = useState(false)
+  const [errorField, setErrorField] = useState<
+    'handle' | 'evidence' | undefined
+  >()
   function saveDraft(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const form = new FormData(event.currentTarget)
@@ -17,6 +20,11 @@ export default function Join() {
     )
     if (result.error || !result.draft) {
       setError(result.error ?? 'Check the nomination details.')
+      setErrorField(result.field)
+      const field = event.currentTarget.elements.namedItem(
+        result.field ?? 'handle',
+      )
+      if (field instanceof HTMLElement) field.focus()
       setSaved(false)
       return
     }
@@ -64,6 +72,7 @@ export default function Join() {
             onChange={() => {
               setError('')
               setSaved(false)
+              setErrorField(undefined)
             }}
           >
             <div className="form-field">
@@ -76,6 +85,7 @@ export default function Join() {
                 autoComplete="off"
                 required
                 aria-describedby="nomination-feedback"
+                aria-invalid={errorField === 'handle'}
               />
             </div>
             <div className="form-field">
@@ -88,6 +98,7 @@ export default function Join() {
                 maxLength={10000}
                 required
                 aria-describedby="evidence-help nomination-feedback"
+                aria-invalid={errorField === 'evidence'}
               />
               <span className="helper" id="evidence-help">
                 Up to 5 links, one per line.

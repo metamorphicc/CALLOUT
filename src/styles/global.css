@@ -1005,6 +1005,16 @@ p {
 .form-error {
   color: var(--color-error);
 }
+
+.form-field [aria-invalid='true'] {
+  border-color: var(--color-error);
+}
+.caller-card:focus-visible .caller-art {
+  border-bottom-color: var(--color-focus);
+}
+.channel-pending {
+  cursor: default;
+}
 .site-footer {
   background: var(--color-text);
   color: var(--color-paper);

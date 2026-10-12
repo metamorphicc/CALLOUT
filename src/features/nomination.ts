@@ -7,12 +7,13 @@ export interface NominationDraft {
 export function validateNomination(
   handle: string,
   evidence: string,
-): { draft?: NominationDraft; error?: string } {
+): { draft?: NominationDraft; error?: string; field?: 'handle' | 'evidence' } {
   const twitterHandle = handle.trim().replace(/^@/, '')
   if (!/^[A-Za-z0-9_]{1,15}$/.test(twitterHandle))
     return {
       error:
         'Enter a Twitter handle using letters, numbers, or underscores (up to 15 characters).',
+      field: 'handle',
     }
   const calloutUrls = [
     ...new Set(
@@ -25,6 +26,7 @@ export function validateNomination(
   if (!calloutUrls.length || calloutUrls.length > 5)
     return {
       error: 'Add between one and five original callout links, one per line.',
+      field: 'evidence',
     }
   for (const link of calloutUrls) {
     try {
@@ -40,11 +42,13 @@ export function validateNomination(
       )
         return {
           error: 'Use HTTPS links to original posts on x.com or twitter.com.',
+          field: 'evidence',
         }
     } catch {
       return {
         error:
           'One link is invalid. Add full HTTPS links to the original callout posts.',
+        field: 'evidence',
       }
     }
   }

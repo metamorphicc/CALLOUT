@@ -4,12 +4,13 @@ import { SectionHead } from '../components/SectionHead'
 import { project } from '../config/project'
 
 export default function Token() {
-  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>(
-    'idle',
-  )
+  const [copyState, setCopyState] = useState<
+    'idle' | 'copying' | 'copied' | 'error'
+  >('idle')
   const address = project.token.contractAddress
   async function copyAddress() {
     if (!address) return
+    setCopyState('copying')
     try {
       await navigator.clipboard.writeText(address)
       setCopyState('copied')
@@ -54,8 +55,17 @@ export default function Token() {
                   value={address}
                   aria-label="Official token contract address"
                 />
-                <button className="button button--small" onClick={copyAddress}>
-                  {copyState === 'copied' ? 'Copied ✓' : 'Copy address'}
+                <button
+                  className="button button--small"
+                  onClick={copyAddress}
+                  disabled={copyState === 'copying'}
+                  aria-busy={copyState === 'copying'}
+                >
+                  {copyState === 'copied'
+                    ? 'Copied ✓'
+                    : copyState === 'copying'
+                      ? 'Copying…'
+                      : 'Copy address'}
                 </button>
               </>
             ) : (
