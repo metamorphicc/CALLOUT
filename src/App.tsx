@@ -3,10 +3,9 @@ import { project } from './config/project'
 export default function App() {
   return (
     <main>
-      <p className="eyebrow">LOCAL DEVELOPMENT</p>
+      <p className="eyebrow">THE ORDER IS TAKING SHAPE</p>
       <h1>{project.name}</h1>
-      <p>Локальное окружение готово к разработке.</p>
-      <p>Дизайн и секции сайта будут реализованы следующим этапом.</p>
+      <p>A signal. A following. An Order.</p>
     </main>
   )
 }
