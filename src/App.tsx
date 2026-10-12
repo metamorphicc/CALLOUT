@@ -6,6 +6,7 @@ import Token from './features/Token'
 import Genesis from './features/Genesis'
 import Join from './features/Join'
 import Footer from './components/Footer'
+import Reveal from './components/Reveal'
 
 export default function App() {
   return (
@@ -16,11 +17,21 @@ export default function App() {
       <Header />
       <main className="site-main" id="main-content">
         <Hero />
-        <MarkedOnes />
-        <Lore />
-        <Token />
-        <Genesis />
-        <Join />
+        <Reveal>
+          <MarkedOnes />
+        </Reveal>
+        <Reveal>
+          <Lore />
+        </Reveal>
+        <Reveal>
+          <Token />
+        </Reveal>
+        <Reveal>
+          <Genesis />
+        </Reveal>
+        <Reveal>
+          <Join />
+        </Reveal>
       </main>
       <Footer />
     </>
