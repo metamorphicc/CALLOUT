@@ -1,0 +1,40 @@
+@import '../../tokens.css';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+
+main {
+  max-width: 64rem;
+  padding: var(--space-large) var(--space-small);
+  margin-inline: auto;
+  min-width: 0;
+}
+
+h1 {
+  margin-block: var(--space-small);
+  font-size: var(--text-title);
+  font-style: normal;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+p {
+  color: var(--color-muted);
+}
+
+.eyebrow {
+  color: var(--color-accent);
+  font-family: var(--font-label);
+}

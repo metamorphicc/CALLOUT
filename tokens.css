@@ -1,0 +1,17 @@
+/* Preliminary tokens from the brief. Final page design is not implemented. */
+:root {
+  --color-background: #0c0b10;
+  --color-surface: #16131e;
+  --color-text: #f0edf5;
+  --color-muted: #b4adbf;
+  --color-accent: #ae8bfa;
+  --color-gold: #e7c36f;
+  --color-positive: #92e3b2;
+  --color-negative: #ed8798;
+  --font-body: system-ui, sans-serif;
+  --font-label: ui-monospace, monospace;
+  --space-small: 1rem;
+  --space-large: 3rem;
+  --text-body: 1rem;
+  --text-title: clamp(2rem, 8vw, 4rem);
+}
