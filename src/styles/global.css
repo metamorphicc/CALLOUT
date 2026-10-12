@@ -1054,6 +1054,59 @@ p {
   outline-color: var(--color-bright);
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+.header-actions > .button {
+  gap: var(--space-xs);
+}
+.join-long-label {
+  display: none;
+}
+.menu-toggle {
+  border: 1px solid var(--color-rule);
+  background: var(--color-transparent);
+  color: var(--color-text);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+}
+.menu-toggle > span {
+  font-size: 1.5rem;
+}
+.mobile-nav {
+  background: var(--color-paper);
+  color: var(--color-text);
+  border-top: 1px solid var(--color-rule-soft);
+  padding: var(--space-xs) var(--space-lg) var(--space-lg);
+}
+.mobile-nav[hidden] {
+  display: none;
+}
+.mobile-nav > a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  white-space: nowrap;
+  font-size: var(--text-small);
+  border-bottom: 1px solid var(--color-rule-soft);
+}
+@media (min-width: 40rem) {
+  .join-long-label {
+    display: inline;
+  }
+}
+@media (min-width: 60rem) {
+  .menu-toggle,
+  .mobile-nav {
+    display: none;
+  }
+}
+
 @keyframes arrive {
   from {
     opacity: 0;
