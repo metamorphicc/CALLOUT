@@ -19,6 +19,8 @@ Reviewed in the Codex in-app browser at CSS widths of 320, 375, 414, 768, 1280, 
 - Hero, leaderboard, Lore, token panel, Genesis art, nomination form, and footer were inspected visually.
 - No browser error or warning logs were recorded during the final review.
 
+When Motion was first introduced during development, a transient React hook error appeared during dependency re-optimization. The final Vite configuration explicitly prebundles Motion and deduplicates React. A forced dependency re-optimization, fresh browser reload, and caller-dialog interaction were subsequently checked without console errors.
+
 Viewport screenshots are stored locally under `artifacts/qa/` and are excluded from Git. Full-page capture was unavailable in the browser; individual viewport captures were used.
 
 ## Contrast
