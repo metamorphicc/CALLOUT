@@ -1382,3 +1382,37 @@ p {
     margin-left: 0;
   }
 }
+
+@media (max-width: 39.99rem) {
+  .hero-grid {
+    padding-top: var(--space-xl);
+  }
+  .hero h1 {
+    margin-block: var(--space-md);
+  }
+  .hero-tagline {
+    font-size: 1.125rem;
+    margin-top: var(--space-md);
+  }
+  .hero .community-links {
+    gap: var(--space-md);
+    font-size: var(--text-label);
+    margin-top: var(--space-lg);
+  }
+  .hero-scene {
+    height: 260px;
+  }
+  .scene-seal {
+    top: 16px;
+    width: 160px;
+  }
+  .scene-coordinate {
+    top: 0;
+  }
+  .scene-watermark {
+    top: 55px;
+  }
+  .scene-star--three {
+    top: 155px;
+  }
+}

@@ -32,6 +32,7 @@ function CallerDialog({
     if (caller && !dialog.current?.open) {
       dialog.current?.showModal()
       sourceLink.current?.focus({ preventScroll: true })
+      if (dialog.current) dialog.current.scrollTop = 0
     } else if (!caller && dialog.current?.open) dialog.current.close()
   }, [caller])
   const stats = caller?.sourceStatistics
