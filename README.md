@@ -1,15 +1,13 @@
 # The Callout Order
 
-Локальная основа проекта. Полноценный сайт пока не реализован.
+A community website for the Callout Order, built with React, TypeScript, Vite, and Motion. The visual direction follows the project's mint Twitter banner and 16-bit character art.
 
-## Окружение
+## Requirements
 
-- Node.js 24.11.1 (версия указана в `.node-version`).
-- npm; установленные версии зафиксированы в `package-lock.json`.
-- React, TypeScript, Vite, Motion.
-- CSS с переменными в `tokens.css`, ESLint и Prettier.
+- Node.js 24.11.1 (see `.node-version`).
+- npm. Dependency versions are recorded in `package-lock.json`.
 
-## Запуск
+## Local development
 
 ```powershell
 npm ci
@@ -17,7 +15,9 @@ Copy-Item .env.example .env.local
 npm run dev
 ```
 
-Адрес разработки: http://127.0.0.1:5173. `.env.local` необязателен, пока публичные ссылки и контракт не определены. Не перезаписывайте существующий `.env.local` при повторном запуске.
+The development server runs at http://127.0.0.1:5173. Environment variables are optional until the project links and token contract are available. Do not overwrite an existing `.env.local` when restarting development.
+
+## Validation and production build
 
 ```powershell
 npm run check
@@ -25,22 +25,24 @@ npm run build
 npm run preview
 ```
 
-Сборка появляется в `dist/`; preview доступен на http://127.0.0.1:4173.
+The build output is written to `dist/`. The preview server runs at http://127.0.0.1:4173.
 
-## Исходники
+## Project structure
 
-- `src/config/project.ts`: название, публичные ссылки, токен и статус коллекции.
-- `src/features/sections.ts`: идентификаторы шести будущих секций.
-- `src/features/marked-ones/`: типы и данные рейтинга с источниками.
-- `src/styles/global.css`, `tokens.css`: базовые стили и предварительные токены.
-- `src/App.tsx`: технический экран для проверки запуска.
+- `src/config/project.ts`: project identity, public links, token information, and collection status.
+- `src/features/sections.ts`: the six section identifiers.
+- `src/features/marked-ones/`: caller types, source metadata, and leaderboard snapshots.
+- `src/styles/global.css` and `tokens.css`: layout styles and shared design tokens.
+- `src/App.tsx`: the page entry point.
 
-## Публичные параметры
+## Public configuration
 
-Переменные `VITE_*` попадают в браузерную сборку. Они предназначены только для публичных адресов и ссылок. Секреты и API-ключи сюда добавлять нельзя. Неизвестные значения оставляются пустыми; будущий интерфейс должен скрывать соответствующие действия. Внешние ссылки принимаются только с HTTPS.
+Variables prefixed with `VITE_` are embedded in the browser bundle. Use them only for public links and addresses, never secrets or API keys. Leave unknown values empty. External links must use HTTPS. Unavailable token and community actions should display clear pending states.
 
-Первые пять трейдеров перенесены из изображения в [посте Alon](https://x.com/a1lon9/status/2108618810420846647). Источник и оговорки сохранены в `src/features/marked-ones/data.ts`. Это транскрипция таблицы наград, а не независимая проверка качества сигналов. Точные Twitter-ники, период наград и актив выплаты не установлены. Звания ордена отделены от места в исходной таблице. Статистика последних 100 callouts в источнике исключает значения выше $500 млн.
+The first five callers were transcribed from the image in [Alon's source post](https://x.com/a1lon9/status/2108618810420846647). This is a rewards leaderboard snapshot, not an independent audit of signal quality. Exact Twitter handles, the reward period, and the payout asset are unconfirmed. The source excludes callouts above $500 million from its last-100-callouts statistics. Order titles and illustrated avatars are creative elements of this project, separate from the source ranking.
 
-Supply, распределение токенов и адрес контракта не определены. NFT имеет статус Coming Soon. Сервер для заявок, wallet connect, mint и торговые интеграции ещё не подключены.
+Token supply, allocation, and contract address have not been provided. The Genesis Collection is Coming Soon. No wallet connection, token transactions, NFT mint, or ownership verification is implemented.
 
-Технический экран имеет `noindex`. Перед публичным релизом нужно заменить его готовым сайтом и настроить метаданные для индексации.
+## Git workflow
+
+Each implementation milestone is committed locally. The project owner handles pushes to the remote repository. Do not push automatically.
