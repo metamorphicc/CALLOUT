@@ -27,11 +27,11 @@ function CallerDialog({
   onDismiss: () => void
 }) {
   const dialog = useRef<HTMLDialogElement>(null)
-  const sourceLink = useRef<HTMLAnchorElement>(null)
+  const initialFocus = useRef<HTMLHeadingElement>(null)
   useEffect(() => {
     if (caller && !dialog.current?.open) {
       dialog.current?.showModal()
-      sourceLink.current?.focus({ preventScroll: true })
+      initialFocus.current?.focus({ preventScroll: true })
       if (dialog.current) dialog.current.scrollTop = 0
     } else if (!caller && dialog.current?.open) dialog.current.close()
   }, [caller])
@@ -54,7 +54,9 @@ function CallerDialog({
               <p className="eyebrow">
                 SOURCE RANK / {String(caller.sourceRank).padStart(2, '0')}
               </p>
-              <h2 id="caller-name">{caller.displayName}</h2>
+              <h2 ref={initialFocus} tabIndex={-1} id="caller-name">
+                {caller.displayName}
+              </h2>
               <span className="order-title">
                 {titles[caller.sourceRank - 1]} <small>Order lore</small>
               </span>
@@ -99,7 +101,6 @@ function CallerDialog({
             listing does not imply affiliation or endorsement.
           </p>
           <a
-            ref={sourceLink}
             className="text-link"
             href={leaderboardSource.url}
             target="_blank"

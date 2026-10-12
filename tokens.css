@@ -14,6 +14,7 @@
   --color-accent-ink: oklch(99% 0.006 162);
   --color-bright: oklch(76% 0.15 162);
   --color-rule: oklch(79% 0.037 162);
+  --color-control-rule: oklch(60% 0.03 162);
   --color-rule-soft: oklch(90% 0.024 162);
   --color-focus: oklch(39% 0.1 162);
   --color-error: oklch(43% 0.16 27);

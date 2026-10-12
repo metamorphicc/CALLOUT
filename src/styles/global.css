@@ -985,7 +985,7 @@ p {
   padding: var(--space-sm);
   color: var(--color-text);
   background: var(--color-background);
-  border: 1px solid var(--color-rule);
+  border: 1px solid var(--color-control-rule);
   border-radius: 0;
   font-size: var(--text-small);
 }
@@ -1066,7 +1066,7 @@ p {
   display: none;
 }
 .menu-toggle {
-  border: 1px solid var(--color-rule);
+  border: 1px solid var(--color-control-rule);
   background: var(--color-transparent);
   color: var(--color-text);
   display: grid;
