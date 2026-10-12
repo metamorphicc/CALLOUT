@@ -1,11 +1,16 @@
-import { project } from './config/project'
+import Header from './components/Header'
+import Hero from './features/Hero'
 
 export default function App() {
   return (
-    <main>
-      <p className="eyebrow">THE ORDER IS TAKING SHAPE</p>
-      <h1>{project.name}</h1>
-      <p>A signal. A following. An Order.</p>
-    </main>
+    <>
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
+      <Header />
+      <main className="site-main" id="main-content">
+        <Hero />
+      </main>
+    </>
   )
 }
