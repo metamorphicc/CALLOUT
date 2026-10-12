@@ -2,6 +2,7 @@ import Header from './components/Header'
 import Hero from './features/Hero'
 import MarkedOnes from './features/marked-ones/MarkedOnes'
 import Lore from './features/Lore'
+import Token from './features/Token'
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Hero />
         <MarkedOnes />
         <Lore />
+        <Token />
       </main>
     </>
   )

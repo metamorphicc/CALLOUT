@@ -749,6 +749,113 @@ p {
   font-size: 1.75rem;
   line-height: 1.05;
 }
+
+.token-section {
+  background: var(--color-paper);
+  color: var(--color-text);
+}
+.token-grid {
+  display: grid;
+  gap: var(--space-xl);
+  align-items: center;
+}
+.token-note {
+  color: var(--color-muted);
+  font-size: var(--text-small);
+}
+.token-terminal {
+  border: 1px solid var(--color-rule);
+  padding: var(--space-lg);
+  background: var(--color-background);
+  color: var(--color-text);
+  min-width: 0;
+}
+.token-terminal-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+.status-label {
+  font-size: 0.625rem;
+  letter-spacing: 0.07em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-accent);
+}
+.token-symbol {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding-block: var(--space-xl);
+}
+.token-symbol > svg {
+  width: 40px;
+}
+.token-symbol > strong {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 7vw, 3.25rem);
+  font-weight: 400;
+}
+.contract-block {
+  border-top: 1px solid var(--color-rule-soft);
+  padding-top: var(--space-lg);
+}
+.contract-block label {
+  display: block;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  margin-bottom: var(--space-xs);
+}
+.contract-block > p {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+.contract-block > p > span {
+  display: block;
+  font-size: var(--text-small);
+  color: var(--color-muted);
+  font-weight: 400;
+  margin-top: 4px;
+}
+.contract-block > input {
+  width: 100%;
+  border: 1px solid var(--color-rule);
+  padding: var(--space-sm);
+  color: var(--color-text);
+  background: var(--color-paper);
+  font-size: var(--text-small);
+  margin-bottom: var(--space-sm);
+}
+.copy-feedback {
+  min-height: 1.4rem;
+  font-size: var(--text-small);
+  color: var(--color-accent);
+  margin-top: var(--space-xs);
+}
+.token-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+.token-actions > .button {
+  flex: 1;
+  gap: var(--space-sm);
+}
+@media (min-width: 60rem) {
+  .token-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-3xl);
+  }
+  .token-terminal {
+    padding: var(--space-xl);
+  }
+  .token-terminal-head {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
 @media (min-width: 60rem) {
   .lore-grid {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
