@@ -655,6 +655,109 @@ p {
   color: var(--color-muted);
   margin-bottom: var(--space-sm);
 }
+
+.lore-section {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+.lore-grid {
+  display: grid;
+  gap: var(--space-2xl);
+}
+.lore-copy > p {
+  color: var(--color-muted);
+  max-width: 51ch;
+  margin-top: var(--space-lg);
+}
+.lore-copy strong {
+  color: var(--color-text);
+  font-weight: 500;
+}
+.lore-figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: var(--space-md);
+}
+.lore-rune {
+  width: min(100%, 320px);
+  aspect-ratio: 1;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.lore-rune > svg:not(.rune-star) {
+  width: 64%;
+  color: var(--color-text);
+  position: relative;
+}
+.rune-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--color-rule-soft) 1px, var(--color-transparent) 1px),
+    linear-gradient(
+      90deg,
+      var(--color-rule-soft) 1px,
+      var(--color-transparent) 1px
+    );
+  background-size: 20px 20px;
+}
+.rune-star {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 26px;
+  color: var(--color-accent);
+}
+.rune-corner {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  border: 2px solid var(--color-accent);
+}
+.rune-corner--one {
+  left: 0;
+  bottom: 0;
+  border-top: 0;
+  border-right: 0;
+}
+.rune-corner--two {
+  top: 0;
+  left: 0;
+  border-bottom: 0;
+  border-right: 0;
+}
+.lore-figure figcaption {
+  width: min(100%, 320px);
+  margin-top: var(--space-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+}
+.lore-figure figcaption > span {
+  color: var(--color-muted);
+  font-size: 0.625rem;
+  max-width: 11ch;
+  letter-spacing: 0.1em;
+}
+.lore-figure figcaption strong {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.75rem;
+  line-height: 1.05;
+}
+@media (min-width: 60rem) {
+  .lore-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-3xl);
+  }
+  .lore-figure {
+    justify-content: center;
+  }
+}
 @media (min-width: 40rem) {
   .callers-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));

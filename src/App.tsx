@@ -1,6 +1,7 @@
 import Header from './components/Header'
 import Hero from './features/Hero'
 import MarkedOnes from './features/marked-ones/MarkedOnes'
+import Lore from './features/Lore'
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
       <main className="site-main" id="main-content">
         <Hero />
         <MarkedOnes />
+        <Lore />
       </main>
     </>
   )
