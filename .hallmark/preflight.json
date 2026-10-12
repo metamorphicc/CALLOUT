@@ -1,0 +1,8 @@
+{
+  "date": "2026-10-12",
+  "framework": "React 19 + Vite 8 + TypeScript 6",
+  "fonts": ["Tiny5", "Space Grotesk Variable"],
+  "palette": "Mint paper, emerald accents, dark ink; supplied Twitter banner",
+  "motion": "Motion 14, finite CSS hero transitions, reduced-motion support",
+  "tokens": "tokens.css"
+}
