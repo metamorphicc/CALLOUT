@@ -1,5 +1,6 @@
 import Header from './components/Header'
 import Hero from './features/Hero'
+import MarkedOnes from './features/marked-ones/MarkedOnes'
 
 export default function App() {
   return (
@@ -10,6 +11,7 @@ export default function App() {
       <Header />
       <main className="site-main" id="main-content">
         <Hero />
+        <MarkedOnes />
       </main>
     </>
   )
