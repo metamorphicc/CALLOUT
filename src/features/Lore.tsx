@@ -24,7 +24,7 @@ export default function Lore() {
           </p>
         </div>
         <figure className="lore-figure">
-          <div className="lore-rune">
+          <div className="lore-rune" aria-hidden="true">
             <PixelStar className="rune-star" />
             <div className="rune-grid" />
             <Mark />

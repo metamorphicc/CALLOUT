@@ -2,6 +2,7 @@
  * genre: playful · macrostructure: Split Studio · theme: custom
  * vibe: mint pixel guild, sharp ink, quiet signal · context: user-provided
  * display: Tiny5 · body: Space Grotesk · axes: light / pixel / chromatic-mint
+ * nav: N7 · footer: Ft5 · enrichment: generated character atlas
  */
 :root {
   --color-background: oklch(97.8% 0.012 162);
@@ -22,7 +23,7 @@
   --color-transparent: transparent;
   --font-display: 'Tiny5', 'Courier New', monospace;
   --font-body: 'Space Grotesk Variable', sans-serif;
-  --font-label: ui-monospace, monospace;
+  --font-label: var(--font-body);
   --space-xs: 0.5rem;
   --space-sm: 0.75rem;
   --space-md: 1rem;

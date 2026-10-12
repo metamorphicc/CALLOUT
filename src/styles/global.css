@@ -256,7 +256,7 @@ p {
 .hero-description {
   margin-top: var(--space-sm);
   color: var(--color-muted);
-  max-width: 37ch;
+  max-width: 45ch;
 }
 .hero-actions {
   display: flex;
@@ -1164,9 +1164,6 @@ p {
   transform: translateY(2px);
 }
 @media (hover: hover) and (pointer: fine) {
-  .button:hover:not(:disabled) {
-    transform: translateY(-2px);
-  }
   .button--ink:hover {
     background: var(--color-accent);
     color: var(--color-accent-ink);
@@ -1181,9 +1178,6 @@ p {
   }
   .caller-card:hover .portrait {
     transform: translateY(-4px);
-  }
-  .caller-card:hover h3 {
-    color: var(--color-accent);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1414,5 +1408,46 @@ p {
   }
   .scene-star--three {
     top: 155px;
+  }
+}
+
+/* Final navigation and form rhythm. */
+h1,
+h2,
+h3 {
+  min-width: 0;
+}
+.site-header {
+  background: var(--color-surface);
+  border-bottom: 2px solid var(--color-text);
+}
+.desktop-nav {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: var(--text-label);
+}
+.form-field input {
+  min-height: 52px;
+}
+.form-field input:focus-visible,
+.form-field textarea:focus-visible {
+  outline-offset: 2px;
+}
+.menu-toggle:active {
+  opacity: 0.6;
+}
+.text-link:active,
+.community-links a:active {
+  opacity: 0.7;
+}
+@media (hover: hover) and (pointer: fine) {
+  .menu-toggle:hover {
+    border-color: var(--color-accent);
+  }
+}
+@media (min-width: 60rem) {
+  .hero-grid {
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-3xl);
   }
 }
