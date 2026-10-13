@@ -56,9 +56,11 @@ function EvidenceLink({ url }: { url: string | null }) {
 export default function SignalDialog({
   record,
   onDismiss,
+  onReadMethod,
 }: {
   record: SignalRecord | null
   onDismiss: () => void
+  onReadMethod: () => void
 }) {
   const dialog = useRef<HTMLDialogElement>(null)
   const heading = useRef<HTMLHeadingElement>(null)
@@ -235,7 +237,10 @@ export default function SignalDialog({
           <a
             className="text-link"
             href="#archive-method"
-            onClick={() => dialog.current?.close()}
+            onClick={() => {
+              onReadMethod()
+              dialog.current?.close()
+            }}
           >
             Read the archive method <Arrow diagonal />
           </a>

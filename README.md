@@ -31,19 +31,24 @@ The build output is written to `dist/`. The preview server runs at http://127.0.
 ## Project structure
 
 - `src/config/project.ts`: project identity, public links, token information, and collection status.
-- `src/features/sections.ts`: the six section identifiers.
+- `src/features/sections.ts`: the seven section identifiers.
 - `src/features/marked-ones/`: caller types, source metadata, and leaderboard snapshots.
+- `src/features/signal-archive/`: signal records, demo fixtures, filters, observation dialogs, and archive styles.
 - `src/styles/global.css` and `tokens.css`: layout styles and shared design tokens.
 - `src/App.tsx`: the page entry point.
 - `src/components/`: navigation, the pixel mark, avatars, and motion wrappers.
-- `src/features/`: Hero, the rewards leaderboard, Lore, token status, Genesis previews, and the nomination desk.
+- `src/features/`: Hero, the rewards leaderboard, Signal Archive, Lore, token status, Genesis previews, and the nomination desk.
 - `tests/nomination.test.mjs`: input validation and evidence-link tests using Node's test runner.
+- `tests/signal-archive.test.mjs`: combined filtering, inclusive UTC dates, sorting, missing observations, and original-post link checks.
+- `docs/signal-archive.md`: archive format, observation method, and replacing demo records with sourced callouts.
 - `docs/artwork.md`: image generation prompt and asset provenance.
 - `docs/verification.md`: validation results and known launch dependencies.
 
 ## Implemented experience
 
-The site includes all six sections, five caller statistics dialogs, a mobile navigation menu, finite hero and scroll animations, and support for reduced-motion preferences. Fonts and the character atlas are hosted with the application. All website text and project documentation are in English.
+The site includes seven sections, five caller statistics dialogs, a mobile navigation menu, finite hero and scroll animations, and support for reduced-motion preferences. Fonts and the character atlas are hosted with the application. All website text and project documentation are in English.
+
+The Signal Archive supports token search, caller and data-status filters, an inclusive UTC date range, sorting, filter reset, empty states, and individual observation dialogs. Six records demonstrate pending, incomplete, and recorded observations. They use fictional callers and tokens, synthetic dates and market values, visible Demo labels, and no original-post links. These fixtures were requested by the project owner; they do not describe the leaderboard callers. Replace them with sourced records using `docs/signal-archive.md`. No live feed, automatic ingestion, or return calculation is connected.
 
 The nomination form validates the Twitter handle and up to five original callout links, then downloads a JSON draft to the visitor's device. It does not submit the nomination to a server. The form explicitly communicates that submissions are not open yet.
 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Arrow, Mark } from '../../components/Mark'
 import { Portrait } from '../../components/Portrait'
 import { SectionHead } from '../../components/SectionHead'
@@ -24,6 +24,10 @@ const callers = [
 export default function SignalArchive() {
   const [filters, setFilters] = useState<SignalFilters>(defaultSignalFilters)
   const [selected, setSelected] = useState<SignalRecord | null>(null)
+  const method = useRef<HTMLDetailsElement>(null)
+  const openMethod = () => {
+    if (method.current) method.current.open = true
+  }
   const result = filterSignals(signalRecords, filters)
   const hasFilters = Object.keys(defaultSignalFilters).some(
     (key) =>
@@ -50,7 +54,7 @@ export default function SignalArchive() {
             title="Keep the signal. Keep the evidence."
             description="Explore dated callouts, their original sources and the observations that followed."
           />
-          <a className="text-link" href="#archive-method">
+          <a className="text-link" href="#archive-method" onClick={openMethod}>
             How to read a record <Arrow diagonal />
           </a>
         </div>
@@ -254,7 +258,7 @@ export default function SignalArchive() {
             )}
           </div>
         )}
-        <details className="archive-method" id="archive-method">
+        <details ref={method} className="archive-method" id="archive-method">
           <summary>
             How the archive records a signal <span aria-hidden="true">+</span>
           </summary>
@@ -289,7 +293,11 @@ export default function SignalArchive() {
             live market feed or automated verification is connected.
           </p>
         </details>
-        <SignalDialog record={selected} onDismiss={() => setSelected(null)} />
+        <SignalDialog
+          record={selected}
+          onDismiss={() => setSelected(null)}
+          onReadMethod={openMethod}
+        />
       </div>
     </section>
   )

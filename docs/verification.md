@@ -46,3 +46,27 @@ WCAG contrast calculated from the OKLCH tokens:
 - Pixel avatars and Order titles are fictional project artwork and lore. NFT mint and ownership verification are outside this release.
 - Reduced-motion fallbacks exist in both CSS and Motion. Media preference emulation was not available during this browser pass.
 - No site deployment or Git push was performed.
+
+## Signal Archive update — October 14, 2026
+
+The browser review above predates the Signal Archive and does not verify the new section.
+
+### Automated verification
+
+- TypeScript, ESLint, Prettier, and the production build pass for the added archive.
+- The Node suite now includes 11 tests. Archive coverage checks combined filters, UTC end-date boundaries, invalid dates, both sort orders without input mutation, missing observations, and original-post URL handling.
+- The local preview and archive module return HTTP 200.
+- Server-rendered markup checks pass for all six demo cards and detail records, archive navigation, visible demo notices, and original-post link handling. Demo records omit original-post actions; a source-linked test record renders the expected link with `noopener noreferrer`. These checks do not exercise a browser or confirm layout and focus behavior.
+- The archive uses existing color and font tokens, native labeled controls, native dialogs, visible error messages, and reduced-motion fallbacks. These are source-level checks.
+
+### Browser verification limit
+
+The browser tool rejected binding the existing local preview tab under its URL security policy. No alternate browser path was used. Archive viewport screenshots, visual overflow checks, rendered contrast, live filter interactions, dialog dismissal/focus restoration, and reduced-motion emulation remain unverified in a browser.
+
+The CSS uses single-column mobile layouts, constrained inputs, `minmax(0, 1fr)` grid tracks, and capped dialog dimensions. These declarations are not a substitute for a visual check. Review 320, 375, 414, 768, 960, 1280, and 1920 px before launch, including the expanded method, empty results, and a dialog with incomplete observations.
+
+### Content status
+
+Six owner-requested demo records contain fictional callers, tokens, dates, and market values. They are visibly labeled and have no real original-post links. Sourced signals, a live data feed, and automated observation collection are not supplied. Replacement instructions and the manual observation method are in `docs/signal-archive.md`.
+
+The archive was committed locally. No deployment or Git push was performed.
