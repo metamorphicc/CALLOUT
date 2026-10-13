@@ -46,7 +46,7 @@ export default function Join() {
       <div className="container join-grid">
         <div className="join-copy">
           <SectionHead
-            chapter="05 / JOIN THE ORDER"
+            chapter="06 / JOIN THE ORDER"
             title="There’s room under the hood."
             description="Follow the story, meet the callers, and help write the next chapter. The Order starts with its people."
           />

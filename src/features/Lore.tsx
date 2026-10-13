@@ -6,7 +6,7 @@ export default function Lore() {
     <section className="section lore-section" id="lore">
       <div className="container lore-grid">
         <div className="lore-copy">
-          <SectionHead chapter="02 / THE LORE" title="First came the signal." />
+          <SectionHead chapter="03 / THE LORE" title="First came the signal." />
           <p>
             Somewhere between a thousand scrolling charts and a million passing
             takes, an Order began to form. Its members shared one belief: a call

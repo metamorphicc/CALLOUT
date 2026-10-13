@@ -27,6 +27,7 @@ export default function Header() {
         </a>
         <nav className="desktop-nav" aria-label="Main navigation">
           <a href="#marked-ones">The Marked Ones</a>
+          <a href="#signal-archive">Archive</a>
           <a href="#lore">The Lore</a>
           <a href="#token">$CALLOUT</a>
           <a href="#genesis">Genesis</a>
@@ -76,6 +77,7 @@ export default function Header() {
       >
         {[
           { label: 'The Marked Ones', id: 'marked-ones' },
+          { label: 'The Signal Archive', id: 'signal-archive' },
           { label: 'The Lore', id: 'lore' },
           { label: '$CALLOUT', id: 'token' },
           { label: 'Genesis Collection', id: 'genesis' },

@@ -23,7 +23,7 @@ export default function Token() {
       <div className="container token-grid">
         <div>
           <SectionHead
-            chapter="03 / $CALLOUT"
+            chapter="04 / $CALLOUT"
             title="The story has a ticker."
             description="$CALLOUT is the token at the heart of the Order’s world. Follow this space for the official contract and launch details."
           />

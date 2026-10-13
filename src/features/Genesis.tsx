@@ -26,7 +26,7 @@ export default function Genesis() {
         </div>
         <div className="genesis-copy">
           <SectionHead
-            chapter="04 / THE GENESIS COLLECTION"
+            chapter="05 / THE GENESIS COLLECTION"
             title="The first chapter, in pixels."
             description="A collection of hooded portraits inspired by the callers who shaped the story. Each one carries the mark of the Order."
           />
