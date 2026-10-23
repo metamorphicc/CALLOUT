@@ -1,6 +1,7 @@
 node_modules/
 dist/
 artifacts/qa/
+artifacts/promo/
 *.local
 .env
 .env.*
