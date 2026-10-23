@@ -4,13 +4,14 @@ import type { FormEvent } from 'react'
 import { validateNomination } from '../features/nomination'
 import { reviewUrl } from '../lib/catalog'
 import { project } from '../config/project'
+import { markedCallers } from '../features/marked-ones/data'
 import { ExternalLink, PageHeading } from '../components/WorkspaceUI'
 
 export default function Community() {
   const [params] = useSearchParams()
-  const suggestedCaller = (params.get('caller') ?? '')
-    .replace(/[^a-zA-Z0-9_]/g, '')
-    .slice(0, 15)
+  const contextualCaller = markedCallers.find(
+    (caller) => caller.id === params.get('caller'),
+  )
   const [error, setError] = useState('')
   const [field, setField] = useState<string>()
   const [review, setReview] = useState('')
@@ -45,7 +46,11 @@ export default function Community() {
       />
       <div className="content-columns">
         <section className="panel submission-panel">
-          <h2>Propose a caller or callout</h2>
+          <h2>
+            {contextualCaller
+              ? `Add a source for ${contextualCaller.displayName}`
+              : 'Propose a caller or callout'}
+          </h2>
           <p>
             Add the caller’s X handle and up to five original posts. You will
             review the details on GitHub before submitting a public issue.
@@ -65,7 +70,11 @@ export default function Community() {
                 name="handle"
                 maxLength={16}
                 placeholder="@caller"
-                defaultValue={suggestedCaller ? '@' + suggestedCaller : ''}
+                defaultValue={
+                  contextualCaller?.twitterHandle
+                    ? '@' + contextualCaller.twitterHandle
+                    : ''
+                }
                 required
                 aria-invalid={field === 'handle'}
                 aria-describedby="submission-feedback"
