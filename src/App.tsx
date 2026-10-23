@@ -18,6 +18,7 @@ import Methodology from './pages/Methodology'
 import Community from './pages/Community'
 import { markedCallers } from './features/marked-ones/data'
 import { publishedSignals } from './lib/catalog'
+import { pageMetadata } from './lib/seo'
 
 class WorkspaceErrorBoundary extends Component<
   { children: ReactNode },
@@ -71,7 +72,21 @@ function Workspace() {
     caller?.displayName ??
     (signal ? `$${signal.symbol}` : (titles[section] ?? 'Page not found'))
   useEffect(() => {
-    document.title = `${title} — The Callout Order`
+    const meta = pageMetadata(location.pathname)
+    document.title = meta.title
+    for (const [selector, value] of [
+      ['meta[name="description"]', meta.description],
+      ['meta[name="robots"]', meta.robots],
+      ['meta[property="og:title"]', meta.title],
+      ['meta[property="og:description"]', meta.description],
+      ['meta[property="og:url"]', meta.canonical],
+      ['meta[name="twitter:title"]', meta.title],
+      ['meta[name="twitter:description"]', meta.description],
+    ] as const)
+      document.querySelector(selector)?.setAttribute('content', value)
+    document
+      .querySelector('link[rel="canonical"]')
+      ?.setAttribute('href', meta.canonical)
     window.scrollTo({ top: 0 })
     main.current?.focus({ preventScroll: true })
   }, [location.pathname, title])

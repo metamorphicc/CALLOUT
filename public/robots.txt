@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://callout-xi.vercel.app/sitemap.xml

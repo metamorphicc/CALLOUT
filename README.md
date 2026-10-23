@@ -6,9 +6,11 @@ A multi-page research directory for Callout Rewards, caller profiles and origina
 
 - Research overview with source-based reward totals and distribution.
 - Searchable caller directory, sorting and comparisons of up to three callers.
+- Editable comparison columns, shareable links and CSV export with source attribution.
 - Individual caller profiles and original-source signal pages.
 - Signal search by symbol, name, mint, caller and date added.
 - Personal reading list stored in the visitor's browser, synchronized across tabs.
+- CSV export of saved callers and signals, plus copy controls for record links and token mints.
 - A community review form that validates evidence and prepares a public GitHub issue for the visitor to review and submit.
 - Source methodology, contextual attribution and explicit handling of unknown data.
 - Responsive navigation, keyboard focus handling and reduced-motion support.
@@ -74,6 +76,16 @@ The community form prepares a GitHub issue with a caller handle and original evi
 ## Static hosting
 
 Deploy `dist/` to a static host. Serve generated route directories as index documents and apply an SPA fallback for unknown paths. `public/_redirects` supplies the fallback for hosts that support that format. Configure equivalent rules on other hosts; do not redirect asset requests to an HTML document. Use HTTPS and the final domain's canonical/share configuration when connecting a public domain.
+
+## Vercel release
+
+Production origin: https://callout-xi.vercel.app.
+
+The committed `vercel.json` selects Vite, runs code checks and tests before the production build, publishes `dist/`, and preserves direct navigation to the pre-rendered routes. The fallback is restricted to paths without a file extension so missing assets retain their normal failure response. No external database or additional environment variables are required for the research workspace.
+
+The build produces per-route titles, descriptions, canonical URLs, Open Graph and X card tags, `sitemap.xml`, and `release.json`. The latter records the package version, Git commit and build time. The share image is `public/og-cover.png`; regenerate it with `node scripts/generate-share.mjs` after changing the brand artwork or public domain. The canonical origin is defined in `src/lib/seo.ts` and the base HTML and robots file.
+
+The project owner pushes the local commits to the Git-connected production branch. Once that deployment finishes, check `/release.json` against the pushed commit, then open `/callers/cupsey`, `/compare` and `/signals/cupsey-csfun` directly. A page displaying the old one-page navigation or fictional archive belongs to an earlier deployment.
 
 ## Public configuration
 
