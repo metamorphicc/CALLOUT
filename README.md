@@ -83,6 +83,8 @@ Production origin: https://callout-xi.vercel.app.
 
 The committed `vercel.json` selects Vite, runs code checks and tests before the production build, publishes `dist/`, and preserves direct navigation to the pre-rendered routes. The fallback is restricted to paths without a file extension so missing assets retain their normal failure response. No external database or additional environment variables are required for the research workspace.
 
+Source checks exclude Vercel's generated `.vercel/` directory. Deployment configuration is excluded from the repository-wide formatting gate so build-time normalization of `vercel.json` cannot fail source formatting; Vercel still parses and validates the configuration itself.
+
 The build produces per-route titles, descriptions, canonical URLs, Open Graph and X card tags, `sitemap.xml`, and `release.json`. The latter records the package version, Git commit and build time. The share image is `public/og-cover.png`; regenerate it with `node scripts/generate-share.mjs` after changing the brand artwork or public domain. The canonical origin is defined in `src/lib/seo.ts` and the base HTML and robots file.
 
 The project owner pushes the local commits to the Git-connected production branch. Once that deployment finishes, check `/release.json` against the pushed commit, then open `/callers/cupsey`, `/compare` and `/signals/cupsey-csfun` directly. A page displaying the old one-page navigation or fictional archive belongs to an earlier deployment.

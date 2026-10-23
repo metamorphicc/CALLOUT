@@ -1,3 +1,7 @@
 node_modules
 dist
 package-lock.json
+
+# Deployment tooling files are not source-formatting inputs.
+.vercel/
+vercel.json
