@@ -4,4 +4,4 @@ SHOW THE RECEIPTS.
 
 CALLOUT lets you compare source stats, trace signals to original posts, and build your own shortlist.
 
-Meet the Marked Ones.
+Meet the Marked Ones. $CALLOUT

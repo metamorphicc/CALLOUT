@@ -19,7 +19,7 @@ Generated files are placed in `artifacts/promo/` and excluded from Git. Source, 
 - `callout-terminal-score.wav`: original PCM sound design, without stock music or voiceover.
 - `render-report.json`: render settings and complete video decode report.
 
-The HTML presentation is silent; the MP4 includes the synthesized score. Both use `film.mjs` as their drawing engine, so rendering is independent of browser recording timing or dropped screen-capture frames.
+The HTML presentation is silent; the MP4 includes the synthesized score, normalized toward -16 LUFS with a -1.5 dB true-peak ceiling. Both use `film.mjs` as their drawing engine, so rendering is independent of browser recording timing or dropped screen-capture frames.
 
 ## Sequence
 
