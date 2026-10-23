@@ -1,62 +1,34 @@
-# The Signal Archive
+# Signal source directory
 
-The archive is a browser-local section after The Marked Ones. Its dataset is bundled with the website; visitors cannot modify or submit archive records. Filters run locally and do not send queries to another service.
+The public archive uses `publishedSignals` in `src/lib/catalog.ts`. Every entry links to an original post and to a caller in the source rewards directory.
 
-## Demo content
+## Published record fields
 
-The project owner requested placeholders until original callout posts are available. `src/features/signal-archive/data.ts` contains six fictional records by Moss Keeper, Quiet Rook, and Glass Caller. Their token names, timestamps, prices, and liquidity values are illustrative. The characters reuse the site's pixel portraits.
+| Field                 | Definition                                                                                               |
+| --------------------- | -------------------------------------------------------------------------------------------------------- |
+| `id`                  | Stable unique ID used in the public route and saved items.                                               |
+| `callerId`            | Existing ID in `markedCallers`.                                                                          |
+| `symbol`, `tokenName` | Token identity as described by the source.                                                               |
+| `mint`                | Exact Solana mint address from the original callout URL.                                                 |
+| `sourceUrl`           | Original Pump.fun callout page.                                                                          |
+| `indexedAt`           | Date this directory added the record, in `YYYY-MM-DD`.                                                   |
+| `publishedAt`         | Independently established original timestamp or `null`. Never use the indexing date as publication time. |
+| `description`         | An editorial source description without invented performance claims.                                     |
 
-The archive notice, each card, and each dialog identify demo content. Demo records never show original-post or observation-source links, even if a URL is accidentally attached. They are separate from the five callers in the source rewards table.
+The two indexed sources are [cupsey / CSFUN](https://pump.fun/callouts/GPuN3s5PZTPcQV7cykNaTyX9cVesPSyz7111nsNKu4cv/4e8e7572-1dc4-4016-b2a0-a76b369bc4c2) and [jackduvalcalls / TikTok](https://pump.fun/callouts/89RAitwPJBEfLK4Gcg5iv7AjFABHWNvoD5rkvRkvpump/0cead5ef-5488-4d87-a065-88a7fe3f4503). Publicly indexed source titles establish the caller and symbol. Full publication timestamps and historical prices have not been independently established.
 
-## Record format
+## Adding a record
 
-`SignalRecord` in `types.ts` stores:
+Confirm the original post, caller attribution, symbol and mint before adding an entry. Retain the exact source URL and a stable ID. Set the indexing date to the date of the editorial addition. Keep publication time `null` when it is unconfirmed. Do not substitute self-reported P&L or present-day values for historical observations.
 
-| Field          | Meaning                                                                                                                                            |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`           | A stable, unique record identifier.                                                                                                                |
-| `provenance`   | `demo` for fiction; `source-linked` for a record supported by an original callout link. Source linkage does not establish claim accuracy.          |
-| `caller`       | Stable caller ID, display name, and portrait index. Use confirmed attribution when sourcing a real callout.                                        |
-| `token`        | Token name, symbol, and mint address. A symbol alone does not identify an asset. This version displays Solana records.                             |
-| `publishedAt`  | Exact original publication timestamp in ISO 8601, including a timezone.                                                                            |
-| `summary`      | An editorial summary of the original thesis. Avoid implying an endorsement or adding claims absent from the source.                                |
-| `source`       | Original HTTPS post URL and the date it was checked, or `null`. Supported original-post links are X/Twitter status URLs and Pump.fun callout URLs. |
-| `entry`        | Publication-time USD price baseline, its actual timestamp, and its evidence reference, or `null`. It is not a trade entry or fill.                 |
-| `observations` | Available `1h` / `24h` USD price snapshots with actual timestamps, optional USD liquidity, and evidence URLs.                                      |
-| `note`         | Record-specific context, missing data, revisions, and limitations.                                                                                 |
+Run checks, tests and the production build after an update. Rebuilding regenerates the overview count, source cards, profile references and pre-rendered detail pages. Unknown profile or signal IDs display an explicit not-found state.
 
-`null` means unavailable. Do not use zero for missing prices or liquidity. Observation sources must be HTTPS links without embedded credentials.
+## Filters and saved items
 
-## Observation method
+Archive filters combine token search, caller and inclusive date-added bounds. Search accepts a symbol with or without `$`, a name, or a mint substring. The URL preserves these selections. Sorting uses the indexing date.
 
-For sourced records, use the following manual curation policy consistently:
+Saved records use `signal:<id>` identifiers in localStorage. IDs outside the published catalog are ignored during restoration. Saving a record does not connect a wallet, follow a social account or create a server account.
 
-1. Identify the token by mint and retain the original publication timestamp. Keep the original source URL; do not substitute a leaderboard or a later retrospective post.
-2. Use the first valid historical USD price quote at or after publication, within 60 seconds, as the baseline. For the `1h` and `24h` observations, apply the same rule at publication plus the relevant interval. Store each actual observation timestamp. If a suitable quote is unavailable, leave the baseline or interval absent.
-3. Record the provider, pool or market, token mint, timestamp, and quote in the evidence reference. Use a consistent historical quote source and market for all three snapshots. Explain exceptions in the note. Attach available liquidity from that observation; leave it `null` if unavailable.
-4. Preserve unfavorable observations. Never replace fixed intervals with an all-time high, a convenient candle, or the caller's self-reported return.
+## Observation records
 
-The interface displays raw observations. It does not calculate P&L, rank signal quality, or establish executable returns. Fees, slippage, available liquidity, and achievable fills are not modeled. No provider adapter enforces this policy automatically; a maintainer must check sourced records before committing them.
-
-## Data statuses
-
-- **Awaiting observations:** no later price observations are attached.
-- **Incomplete data:** some observations exist, but the baseline or one of the two intervals is missing.
-- **Observations recorded:** a baseline and both intervals exist. This describes completeness, not verification or profitability; liquidity and evidence may still be missing.
-
-## Replacing examples
-
-Edit `data.ts` to remove demo fixtures and add source-linked records. Confirm the caller, source post, mint, and publication time. Include only observations that can be sourced, preserving gaps. Keep stable IDs and do not reuse a demo's synthetic market values. The caller selector and demo notice derive from the dataset automatically. An empty dataset shows an explanatory empty state.
-
-The original-post link appears only for source-linked records with an accepted original-post URL. Other reference links are shown in the observation timeline. Review the rendered record to confirm it points to the correct caller and token.
-
-## Interaction and layout
-
-- Token searches match symbol, name, and mint; a leading `$` is optional.
-- Caller, token, status, and date filters combine. Dates use publication time in UTC, including the entire end date.
-- Invalid or reversed date ranges display a connected error message. Reset restores all controls and newest-first order.
-- Native dialogs support Escape, a close button, and backdrop dismissal, with initial heading focus. Method links open the explanatory disclosure.
-- Filters and cards use one column on narrow screens and two columns from 640 px. The filter toolbar and method notes expand at 960 px. Dialog height is capped at 85dvh.
-- Record entrance and dialog entrance use existing animations. Reduced-motion preferences remove these transitions.
-
-Run `npm run check`, `npm test`, and `npm run build` after editing records or behavior. Browser layout and interaction checks are a separate step; see the dated archive verification note in `docs/verification.md`.
+The typed observation format in `src/features/signal-archive/` remains available for future evidenced series. Its published dataset is empty. No historical price series is shown in the current source directory. A baseline, observation timestamps, provider, market, mint, fees and liquidity assumptions would need a separate reviewed methodology before performance could be presented.

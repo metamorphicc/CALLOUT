@@ -15,7 +15,7 @@ export const leaderboardSource = {
   ],
 } as const
 
-// Top five in source order. Titles and pixel portraits will be assigned later.
+// Top five in source order. Project illustrations are separate from caller identity.
 const sourceRows = [
   {
     name: 'chairman',

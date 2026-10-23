@@ -10,7 +10,7 @@ export interface SignalObservation {
 
 export interface SignalRecord {
   id: string
-  provenance: 'demo' | 'source-linked'
+  provenance: 'source-linked'
   caller: { id: string; name: string; portraitIndex: number }
   token: { name: string; symbol: string; mint: string | null }
   publishedAt: string

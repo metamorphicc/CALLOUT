@@ -78,8 +78,9 @@ export default function Community() {
               />
             </label>
             <p className="fine-print">
-              Use original X/Twitter posts, one per line. You’ll need a GitHub
-              account to submit. Issues and their contents are public.
+              Use original X/Twitter or Pump.fun callout posts, one per line.
+              You’ll need a GitHub account to submit. Issues and their contents
+              are public.
             </p>
             <p
               className={error ? 'error-text' : 'submission-feedback'}

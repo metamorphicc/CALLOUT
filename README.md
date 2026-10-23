@@ -1,23 +1,37 @@
 # The Callout Order
 
-A community website for the Callout Order, built with React, TypeScript, Vite, and Motion. The visual direction follows the project's mint Twitter banner and 16-bit character art.
+A multi-page research directory for Callout Rewards, caller profiles and original signal sources. The interface pairs a mint workspace with the Order's pixel identity.
+
+## Features
+
+- Research overview with source-based reward totals and distribution.
+- Searchable caller directory, sorting and comparisons of up to three callers.
+- Individual caller profiles and original-source signal pages.
+- Signal search by symbol, name, mint, caller and date added.
+- Personal reading list stored in the visitor's browser, synchronized across tabs.
+- A community review form that validates evidence and prepares a public GitHub issue for the visitor to review and submit.
+- Source methodology, contextual attribution and explicit handling of unknown data.
+- Responsive navigation, keyboard focus handling and reduced-motion support.
+- Pre-rendered HTML for all 15 public routes, with client-side navigation.
+
+## Stack
+
+React 19, TypeScript, React Router, Vite, CSS custom properties, ESLint, Prettier, and Node's test runner. Fonts and illustrations are served locally. Production is a static deployment; no database or private credentials are required.
 
 ## Requirements
 
-- Node.js 24.11.1 (see `.node-version`).
-- npm. Dependency versions are recorded in `package-lock.json`.
+Node.js 24.11.1 (see `.node-version`) and npm. Exact dependency versions are in `package-lock.json`.
 
-## Local development
+## Development
 
 ```powershell
 npm ci
-Copy-Item .env.example .env.local
-npm run dev
+npm run dev -- --port 5187
 ```
 
-The development server runs at http://127.0.0.1:5173. Environment variables are optional until the project links and token contract are available. Do not overwrite an existing `.env.local` when restarting development.
+Open http://127.0.0.1:5187. Vite requires the requested port to be free. Optional public project links can be set in `.env.local` using `.env.example`; preserve an existing local environment file.
 
-## Validation and production build
+## Validation
 
 ```powershell
 npm run check
@@ -26,42 +40,57 @@ npm run build
 npm run preview
 ```
 
-The build output is written to `dist/`. The preview server runs at http://127.0.0.1:4173.
+The build generates `dist/`, including one HTML document per public route. `scripts/prerender.mjs` renders the actual React pages and rejects unpublished interface labels. The preview server uses http://127.0.0.1:4173.
 
-## Project structure
+## Routes
 
-- `src/config/project.ts`: project identity, public links, token information, and collection status.
-- `src/features/sections.ts`: the seven section identifiers.
-- `src/features/marked-ones/`: caller types, source metadata, and leaderboard snapshots.
-- `src/features/signal-archive/`: signal records, demo fixtures, filters, observation dialogs, and archive styles.
-- `src/styles/global.css` and `tokens.css`: layout styles and shared design tokens.
-- `src/App.tsx`: the page entry point.
-- `src/components/`: navigation, the pixel mark, avatars, and motion wrappers.
-- `src/features/`: Hero, the rewards leaderboard, Signal Archive, Lore, token status, Genesis previews, and the nomination desk.
-- `tests/nomination.test.mjs`: input validation and evidence-link tests using Node's test runner.
-- `tests/signal-archive.test.mjs`: combined filtering, inclusive UTC dates, sorting, missing observations, and original-post link checks.
-- `docs/signal-archive.md`: archive format, observation method, and replacing demo records with sourced callouts.
-- `docs/artwork.md`: image generation prompt and asset provenance.
-- `docs/verification.md`: validation results and known launch dependencies.
+| Route                    | Purpose                                   |
+| ------------------------ | ----------------------------------------- |
+| `/`                      | Research overview                         |
+| `/callers`               | Caller directory and comparison selection |
+| `/callers/:id`           | Caller profile                            |
+| `/compare?callers=id,id` | Shareable source comparison               |
+| `/signals`               | Original-source archive                   |
+| `/signals/:id`           | Signal evidence record                    |
+| `/saved`                 | Browser-local reading list                |
+| `/about`                 | Project identity and artwork              |
+| `/community`             | Contributions and corrections             |
+| `/methodology`           | Source definitions and limits             |
 
-## Implemented experience
+Search and filter state is stored in the page URL. Reading-list state uses the `callout.saved.v1` localStorage key; unsupported or blocked browser storage produces an explicit error instead of a false success.
 
-The site includes seven sections, five caller statistics dialogs, a mobile navigation menu, finite hero and scroll animations, and support for reduced-motion preferences. Fonts and the character atlas are hosted with the application. All website text and project documentation are in English.
+## Data and sources
 
-The Signal Archive supports token search, caller and data-status filters, an inclusive UTC date range, sorting, filter reset, empty states, and individual observation dialogs. Six records demonstrate pending, incomplete, and recorded observations. They use fictional callers and tokens, synthetic dates and market values, visible Demo labels, and no original-post links. These fixtures were requested by the project owner; they do not describe the leaderboard callers. Replace them with sourced records using `docs/signal-archive.md`. No live feed, automatic ingestion, or return calculation is connected.
+`src/features/marked-ones/data.ts` contains five rows transcribed from [Alon's source post](https://x.com/a1lon9/status/2108618810420846647). It is a historical rewards snapshot; the reporting period and payout asset are unspecified. Source gain statistics exclude callouts above $500 million and are not independently reproduced returns.
 
-The nomination form validates the Twitter handle and up to five original callout links, then downloads a JSON draft to the visitor's device. It does not submit the nomination to a server. The form explicitly communicates that submissions are not open yet.
+`src/lib/catalog.ts` contains the original-source signal directory. Each entry identifies a caller, token mint, original Pump.fun URL and indexing date. Exact publication times and historical market observations are not inferred. See `docs/signal-archive.md` before adding records.
+
+The site is an independent community project. Listed names and illustrations do not imply affiliation or endorsement. Unconfigured social channels, token actions, and collection transactions are not rendered. An actual public contract is required before a token contract panel can appear.
+
+## Contributions
+
+The community form prepares a GitHub issue with a caller handle and original evidence links. Preparing a review does not submit it. The visitor reviews the prefilled issue, signs in to GitHub if necessary, and publishes it there. GitHub issues are public; there is no separate submission server or automatic public listing.
+
+## Static hosting
+
+Deploy `dist/` to a static host. Serve generated route directories as index documents and apply an SPA fallback for unknown paths. `public/_redirects` supplies the fallback for hosts that support that format. Configure equivalent rules on other hosts; do not redirect asset requests to an HTML document. Use HTTPS and the final domain's canonical/share configuration when connecting a public domain.
 
 ## Public configuration
 
-Variables prefixed with `VITE_` are embedded in the browser bundle. Use them only for public links and addresses, never secrets or API keys. Leave unknown values empty. External links must use HTTPS. Unavailable token and community actions should display clear pending states.
+`VITE_*` values are embedded in browser JavaScript and are exclusively for public URLs and token addresses. Never put API keys or secrets in them. The local app works without environment variables.
 
-The first five callers were transcribed from the image in [Alon's source post](https://x.com/a1lon9/status/2108618810420846647). This is a rewards leaderboard snapshot, not an independent audit of signal quality. Exact Twitter handles, the reward period, and the payout asset are unconfirmed. The source excludes callouts above $500 million from its last-100-callouts statistics. Order titles and illustrated avatars are creative elements of this project, separate from the source ranking.
+## Project structure
 
-Token supply, allocation, and contract address have not been provided. The Genesis Collection is Coming Soon. No wallet connection, token transactions, NFT mint, or ownership verification is implemented.
-
-The HTML retains `noindex, nofollow` while the site is awaiting launch information. Set the official project links and contract values, add production canonical/share metadata, and review this directive before public launch.
+- `src/App.tsx`: route definitions, workspace shell and error boundary.
+- `src/pages/`: public page implementations.
+- `src/components/WorkspaceUI.tsx`: shared research tables, cards and controls.
+- `src/components/SavedProvider.tsx`: persistent browser reading list.
+- `src/lib/catalog.ts`: signal sources, selectors, formatting and contribution URLs.
+- `src/styles/workspace.css` and `tokens.css`: interface styles and brand tokens.
+- `scripts/prerender.mjs`: production HTML generation.
+- `tests/`: source integrity, filtering, persistence input and evidence validation.
+- `docs/verification.md`: dated verification report.
 
 ## Git workflow
 
-Each implementation milestone is committed locally. The project owner handles pushes to the remote repository. Do not push automatically.
+Commit implementation milestones locally. The project owner pushes to the remote repository. Never push automatically.

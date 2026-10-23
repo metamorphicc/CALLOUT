@@ -1,33 +1,19 @@
 import { project } from '../config/project'
-import { Arrow } from './Mark'
-
-const links = [
-  { name: 'Twitter / X', url: project.links.twitter },
-  { name: 'Telegram', url: project.links.telegram },
-  { name: 'Pump.fun', url: project.links.pump },
-]
+import { ExternalLink } from './WorkspaceUI'
 
 export default function CommunityLinks() {
-  return (
-    <div className="community-links" aria-label="Community channels">
-      {links.map((link) =>
-        link.url ? (
-          <a
-            key={link.name}
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {link.name}
-            <Arrow diagonal />
-          </a>
-        ) : (
-          <span className="channel-pending" key={link.name}>
-            {link.name}
-            <small>Coming soon</small>
-          </span>
-        ),
-      )}
-    </div>
-  )
+  const links = [
+    { name: 'X / Twitter', url: project.links.twitter },
+    { name: 'Telegram', url: project.links.telegram },
+    { name: 'Pump.fun', url: project.links.pump },
+  ].filter((link): link is { name: string; url: string } => Boolean(link.url))
+  return links.length ? (
+    <nav aria-label="Community channels">
+      {links.map((link) => (
+        <ExternalLink href={link.url} key={link.name}>
+          {link.name}
+        </ExternalLink>
+      ))}
+    </nav>
+  ) : null
 }

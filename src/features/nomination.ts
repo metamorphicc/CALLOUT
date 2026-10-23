@@ -31,17 +31,24 @@ export function validateNomination(
   for (const link of calloutUrls) {
     try {
       const url = new URL(link)
+      const twitterPost =
+        ['x.com', 'www.x.com', 'twitter.com', 'www.twitter.com'].includes(
+          url.hostname,
+        ) && /^\/[A-Za-z0-9_]+\/status\/\d+\/?$/.test(url.pathname)
+      const pumpPost =
+        url.hostname === 'pump.fun' &&
+        /^\/callouts\/[1-9A-HJ-NP-Za-km-z]{32,44}\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\/?$/i.test(
+          url.pathname,
+        )
       if (
         url.protocol !== 'https:' ||
-        !['x.com', 'www.x.com', 'twitter.com', 'www.twitter.com'].includes(
-          url.hostname,
-        ) ||
-        !/^\/[A-Za-z0-9_]+\/status\/\d+\/?$/.test(url.pathname) ||
+        !(twitterPost || pumpPost) ||
         url.username ||
         url.password
       )
         return {
-          error: 'Use HTTPS links to original posts on x.com or twitter.com.',
+          error:
+            'Use HTTPS links to original X/Twitter posts or Pump.fun callouts.',
           field: 'evidence',
         }
     } catch {

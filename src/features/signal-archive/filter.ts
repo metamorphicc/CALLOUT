@@ -73,9 +73,9 @@ export function filterSignals(
   return { records: matches, error: null }
 }
 
-// Demo records never expose an original-post link, even if a fixture gains one.
+// Runtime input must identify a source-linked record before exposing its link.
 export function originalPostUrl(record: SignalRecord): string | null {
-  if (record.provenance === 'demo' || !record.source) return null
+  if (record.provenance !== 'source-linked' || !record.source) return null
   try {
     const url = new URL(record.source.url)
     if (url.protocol !== 'https:' || url.username || url.password) return null

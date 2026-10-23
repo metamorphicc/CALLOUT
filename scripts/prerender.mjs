@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, URL } from 'node:url'
+import { log } from 'node:console'
 import { createServer } from 'vite'
 import { createElement } from 'react'
 import { renderToString } from 'react-dom/server'
@@ -62,7 +63,7 @@ try {
     await mkdir(directory, { recursive: true })
     await writeFile(path.join(directory, 'index.html'), html)
   }
-  console.log(`Pre-rendered ${pages.length} public routes.`)
+  log(`Pre-rendered ${pages.length} public routes.`)
 } finally {
   await server.close()
 }

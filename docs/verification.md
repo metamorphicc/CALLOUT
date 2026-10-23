@@ -1,72 +1,37 @@
-# Verification — October 12, 2026
+# Release verification — October 23, 2026
+
+## Scope
+
+Version 1.0.0 replaces the single-page presentation with a routed research workspace. The public interface uses five sourced caller rows and two original-source callout records. Unavailable token and social actions are omitted.
 
 ## Automated checks
 
-- TypeScript type checking, ESLint, Prettier, and the production build pass.
-- Five Node test-runner tests cover valid nominations, normalization, duplicate receipts, missing evidence, invalid handles, insecure links, lookalike domains, credentials, and the five-post limit.
-- No Cyrillic text remains in the website source or README.
-- Git whitespace validation passes.
+- TypeScript, ESLint and Prettier pass.
+- Sixteen Node tests cover source references, caller sort/filter behavior, saved-item restoration, contribution URLs, X/Twitter and Pump.fun evidence validation and observation-filter utilities.
+- The production build generates 15 public HTML documents, including all five caller profiles and both signal pages.
+- The pre-render step rejects unpublished interface labels in route markup.
+- Git whitespace checks pass.
 
-## Browser review
+## Browser checks
 
-Reviewed in the Codex in-app browser at CSS widths of 320, 375, 414, 768, 1280, 1440, and 1920 pixels. No horizontal page overflow or overflowing content was detected. The hero's primary action and main illustration fit the 1280 × 800 laptop viewport.
+The current in-app browser was used for the new interface. The earlier tab-binding failure did not recur when selecting the current tab by URL.
 
-- All five caller dialogs display the correct caller and source reward amount.
-- Dialogs open at their top with visible initial focus. Escape and the close button dismiss them; focus returns to the originating card.
-- The mobile navigation opens, closes with Escape, returns focus to its toggle, and closes after an anchor selection.
-- Nomination validation focuses the invalid field and sets `aria-invalid`. A valid test draft was downloaded and its JSON content was checked on disk.
-- Unavailable token actions are disabled. Unknown community URLs are shown as pending channels.
-- Hero, leaderboard, Lore, token panel, Genesis art, nomination form, and footer were inspected visually.
-- No browser error or warning logs were recorded during the final review.
+- Overview, caller directory, signal archive, the longest caller profile and community form were checked at 320, 375, 414, 768, 960, 1280 and 1920 CSS pixels: 35 route/viewport combinations.
+- No horizontal document overflow or overflowing main-content elements were found in those combinations.
+- Desktop overview, mobile comparison and narrow layouts were visually inspected.
+- Caller search returned Dior with the correct source values. Sorting by median moved cupsey first.
+- Saving Dior persisted after navigation and reload. Removing that test save cleared the reading list.
+- Selecting chairman and cupsey produced the correct side-by-side source comparison and preserved selection in the URL.
+- Signal search accepts `$tiktok` and displays the matching original-source record.
+- The community form rejects an empty handle and prepares an encoded GitHub review URL for valid evidence. No issue was published during testing.
+- Mobile navigation opens and closes, including Escape with focus returned to its toggle.
+- A direct profile URL in the production preview renders the correct source values. Saving and restoring a profile works against the built bundle, with no production console warnings or errors.
+- A fresh development reload after dependency optimization produces no new console warnings or errors. React Router is explicitly prebundled with React to avoid transient mismatched runtimes while dependencies are optimized.
 
-When Motion was first introduced during development, a transient React hook error appeared during dependency re-optimization. The final Vite configuration explicitly prebundles Motion and deduplicates React. A forced dependency re-optimization, fresh browser reload, and caller-dialog interaction were subsequently checked without console errors.
+## Content and infrastructure boundaries
 
-Viewport screenshots are stored locally under `artifacts/qa/` and are excluded from Git. Full-page capture was unavailable in the browser; individual viewport captures were used.
+Rewards are a source snapshot, not a live feed or audited return. Original publication timestamps and historical market prices remain unknown where not independently sourced. The interface preserves these distinctions and uses indexing dates explicitly.
 
-## Contrast
+Saved records are local to the browser. Contributions are reviewed through public GitHub issues; no private inbox or database submission endpoint is claimed. Public project links and financial actions require actual configuration before appearing.
 
-WCAG contrast calculated from the OKLCH tokens:
-
-| Pair                    | Ratio   |
-| ----------------------- | ------- |
-| Primary text / paper    | 17.92:1 |
-| Secondary text / mint   | 6.46:1  |
-| Accent text / paper     | 6.87:1  |
-| Button text / accent    | 6.87:1  |
-| Focus ring / background | 8.46:1  |
-| Control border / paper  | 3.79:1  |
-| Error text / paper      | 8.57:1  |
-
-## Launch dependencies and verification limits
-
-- Official Twitter, Telegram, Pump.fun, trade/chart URLs, the token contract, supply, and allocation are awaiting project-owner input.
-- The contract-copy branch is implemented and type-checked; browser testing requires a supplied contract address.
-- Nomination submission requires an actual destination or backend. Current behavior only saves a draft locally.
-- The source leaderboard is a transcription, not an on-chain audit. Exact handles and reward periods are unconfirmed; source caveats remain available in the caller dialogs.
-- Pixel avatars and Order titles are fictional project artwork and lore. NFT mint and ownership verification are outside this release.
-- Reduced-motion fallbacks exist in both CSS and Motion. Media preference emulation was not available during this browser pass.
-- No site deployment or Git push was performed.
-
-## Signal Archive update — October 14, 2026
-
-The browser review above predates the Signal Archive and does not verify the new section.
-
-### Automated verification
-
-- TypeScript, ESLint, Prettier, and the production build pass for the added archive.
-- The Node suite now includes 11 tests. Archive coverage checks combined filters, UTC end-date boundaries, invalid dates, both sort orders without input mutation, missing observations, and original-post URL handling.
-- The local preview and archive module return HTTP 200.
-- Server-rendered markup checks pass for all six demo cards and detail records, archive navigation, visible demo notices, and original-post link handling. Demo records omit original-post actions; a source-linked test record renders the expected link with `noopener noreferrer`. These checks do not exercise a browser or confirm layout and focus behavior.
-- The archive uses existing color and font tokens, native labeled controls, native dialogs, visible error messages, and reduced-motion fallbacks. These are source-level checks.
-
-### Browser verification limit
-
-The browser tool rejected binding the existing local preview tab under its URL security policy. No alternate browser path was used. Archive viewport screenshots, visual overflow checks, rendered contrast, live filter interactions, dialog dismissal/focus restoration, and reduced-motion emulation remain unverified in a browser.
-
-The CSS uses single-column mobile layouts, constrained inputs, `minmax(0, 1fr)` grid tracks, and capped dialog dimensions. These declarations are not a substitute for a visual check. Review 320, 375, 414, 768, 960, 1280, and 1920 px before launch, including the expanded method, empty results, and a dialog with incomplete observations.
-
-### Content status
-
-Six owner-requested demo records contain fictional callers, tokens, dates, and market values. They are visibly labeled and have no real original-post links. Sourced signals, a live data feed, and automated observation collection are not supplied. Replacement instructions and the manual observation method are in `docs/signal-archive.md`.
-
-The archive was committed locally. No deployment or Git push was performed.
+Reduced-motion support is provided by the shared CSS media query. No account, wallet transaction, NFT mint, token deployment, public site deployment or Git push was performed.

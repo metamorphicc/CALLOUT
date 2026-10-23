@@ -2,7 +2,9 @@ function publicUrl(value: string | undefined): string | null {
   if (!value?.trim()) return null
   try {
     const url = new URL(value.trim())
-    return url.protocol === 'https:' ? url.href : null
+    return url.protocol === 'https:' && !url.username && !url.password
+      ? url.href
+      : null
   } catch {
     return null
   }
@@ -24,5 +26,4 @@ export const project = {
     supply: null,
     distribution: null,
   },
-  collection: { name: 'The Genesis Collection', status: 'coming-soon' },
 } as const

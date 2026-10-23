@@ -64,7 +64,9 @@ export default function CallerProfile() {
         <section>
           <div className="panel-heading standalone">
             <h2>Indexed callouts</h2>
-            <span>{signals.length} records</span>
+            <span>
+              {signals.length} {signals.length === 1 ? 'record' : 'records'}
+            </span>
           </div>
           {signals.length ? (
             <div className="signal-grid">
