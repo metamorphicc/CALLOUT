@@ -63,7 +63,7 @@ export default function Overview() {
           </div>
           <div
             className="reward-chart"
-            role="img"
+            role="group"
             aria-label={markedCallers
               .map(
                 (caller) =>

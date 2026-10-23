@@ -16,6 +16,8 @@ import Saved from './pages/Saved'
 import About from './pages/About'
 import Methodology from './pages/Methodology'
 import Community from './pages/Community'
+import { markedCallers } from './features/marked-ones/data'
+import { publishedSignals } from './lib/catalog'
 
 class WorkspaceErrorBoundary extends Component<
   { children: ReactNode },
@@ -56,7 +58,18 @@ function Workspace() {
     compare: 'Compare callers',
     methodology: 'Methodology',
   }
-  const title = titles[section] ?? 'Page not found'
+  const recordId = location.pathname.split('/')[2]
+  const caller =
+    section === 'callers' && recordId
+      ? markedCallers.find((item) => item.id === recordId)
+      : null
+  const signal =
+    section === 'signals' && recordId
+      ? publishedSignals.find((item) => item.id === recordId)
+      : null
+  const title =
+    caller?.displayName ??
+    (signal ? `$${signal.symbol}` : (titles[section] ?? 'Page not found'))
   useEffect(() => {
     document.title = `${title} — The Callout Order`
     window.scrollTo({ top: 0 })

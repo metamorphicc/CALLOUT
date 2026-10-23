@@ -77,7 +77,9 @@ export default function Callers() {
       <div className="panel">
         <div className="panel-heading">
           <h2>Caller directory</h2>
-          <span>{callers.length} callers</span>
+          <span>
+            {callers.length} {callers.length === 1 ? 'caller' : 'callers'}
+          </span>
         </div>
         <CallerTable callers={callers} selected={selected} onSelect={select} />
       </div>

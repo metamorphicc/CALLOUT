@@ -108,7 +108,7 @@ export default function Signals() {
       >
         {invalid
           ? 'The end date must be on or after the start date.'
-          : `${signals.length} original-source records`}
+          : `${signals.length} original-source ${signals.length === 1 ? 'record' : 'records'}`}
       </p>
       {!invalid && signals.length ? (
         <div className="signal-grid">
