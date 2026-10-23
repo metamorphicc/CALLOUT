@@ -1,7 +1,7 @@
 import { Link } from 'react-router'
 import { Mark } from '../components/Mark'
 import { Portrait } from '../components/Portrait'
-import { PageHeading, ExternalLink } from '../components/WorkspaceUI'
+import { PageHeading, ExternalLink, Icon } from '../components/WorkspaceUI'
 import { project } from '../config/project'
 import { useState } from 'react'
 
@@ -19,7 +19,7 @@ export default function About() {
     <>
       <PageHeading
         title="Inside the Order"
-        description="The people, the record and the identity behind CALLOUT."
+        description="A shared identity. A record that stays."
       />
       <div className="content-columns">
         <article className="reading-panel">
@@ -29,45 +29,37 @@ export default function About() {
           </div>
           <h2>Every signal leaves a mark.</h2>
           <p>
-            A callout is a public idea attached to a moment. Its value comes
-            from what can be traced: who published it, what they said, and what
-            the evidence shows afterward.
+            A callout starts with a conviction: a name, a token, a moment on the
+            timeline. Then the feed moves on. The Order began with a simple idea
+            — keep the trail.
           </p>
           <p>
-            The Callout Order keeps those records together. The caller directory
-            starts with the rewards table shared by Alon. The signal archive
-            links back to original posts, while your reading list gives you a
-            personal way to follow the record.
+            CALLOUT brings caller profiles, recorded rewards and original
+            signals into one workspace. Explore the people behind the calls,
+            compare their records and keep the sources you want to revisit.
           </p>
           <h2>The Marked Ones</h2>
           <p>
-            These are the names in the source rewards snapshot. Inclusion
-            records that source; it does not imply endorsement, a partnership,
-            or a guarantee about future calls.
-          </p>
-          <Link className="inline-action" to="/callers">
-            Meet the callers →
-          </Link>
-          <h2>The visual language</h2>
-          <p>
-            The triangle is the Order’s seal. Hooded pixel characters carry its
-            identity, with a mint palette drawn from the community banner. They
-            are original brand illustrations, distinct from verified caller
-            portraits.
+            The first five names come from the Callout Rewards table shared by
+            Alon. They open the record of the Order. Each profile connects the
+            numbers to the original table and the callouts in our archive.
           </p>
           <div className="about-portraits" aria-label="Order character artwork">
             {[0, 1, 2, 3, 4].map((index) => (
               <Portrait index={index} key={index} />
             ))}
           </div>
-          <h2>Built around the source</h2>
+          <Link className="inline-action" to="/callers">
+            Meet the callers <Icon name="arrow" />
+          </Link>
+          <h2>The record belongs to its readers.</h2>
           <p>
-            The directory keeps ranking facts separate from interpretation.
-            Original references stay attached, unknowns stay explicit, and the
-            record remains open to correction.
+            Your shortlist is yours to build. Save a caller, follow an original
+            post, or bring a source that belongs in the archive. Contributions
+            and corrections keep the record useful.
           </p>
-          <Link className="inline-action" to="/methodology">
-            How the records are read →
+          <Link className="inline-action" to="/community">
+            Contribute to the Order <Icon name="arrow" />
           </Link>
           {project.token.contractAddress && (
             <section className="asset-details">
@@ -94,15 +86,17 @@ export default function About() {
           )}
         </article>
         <aside className="panel detail-aside">
-          <h2>Explore the Order</h2>
-          <Link to="/callers">Caller directory →</Link>
-          <Link to="/signals">Signal archive →</Link>
-          <Link to="/community">Contribute a record →</Link>
-          <h3>Independent by design</h3>
+          <h2>Find your way</h2>
+          <Link to="/callers">Explore callers →</Link>
+          <Link to="/compare">Compare records →</Link>
+          <Link to="/signals">Follow a signal →</Link>
+          <Link to="/saved">Your shortlist →</Link>
+          <h3>Built around the source</h3>
           <p>
-            A community research project. No affiliation with Pump.fun or
-            endorsement by listed callers.
+            Read the definitions behind the numbers and the references behind
+            each record.
           </p>
+          <Link to="/methodology">Sources & methodology →</Link>
         </aside>
       </div>
     </>

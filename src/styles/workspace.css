@@ -3,6 +3,8 @@
  * Brand: mint / sharp ink / pixel illustration. Shared tokens retained.
  */
 @import '../../tokens.css';
+
+/* Release refinement · same Workbench family and locked mint palette. */
 * {
   box-sizing: border-box;
 }
@@ -1355,5 +1357,118 @@ dd {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4
+ * genre: modern-minimal · macrostructure: Workbench · design-system: design.md · designed-as-app
+ */
+.record-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+.workspace-heading > .record-actions {
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+.source-disclosure {
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: var(--space-lg);
+  row-gap: var(--space-xs);
+  padding-block: var(--space-sm);
+}
+.source-disclosure .source-symbol {
+  display: none;
+}
+.source-disclosure .inline-action {
+  font-size: inherit;
+}
+.archive-caption {
+  margin-top: var(--space-lg);
+  font-size: var(--text-small);
+  color: var(--color-muted);
+}
+.archive-caption a {
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+.shortlist-content {
+  display: grid;
+  padding: var(--space-lg);
+  gap: var(--space-md);
+}
+.shortlist-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  padding-top: var(--space-sm);
+  border-top: var(--rule-width) solid var(--color-rule-soft);
+}
+.shortlist-row .save-control span {
+  display: none;
+}
+.shortlist-row .table-identity {
+  min-width: 0;
+}
+.shortlist-row .portrait {
+  width: 38px;
+}
+.reward-bar-track > span {
+  transform-origin: left;
+  animation: chart-reveal var(--dur-long) var(--ease-out) both;
+}
+@keyframes chart-reveal {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.workspace-topbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+}
+.sidebar-navigation {
+  overflow-y: auto;
+}
+.workspace-empty {
+  border-style: solid;
+}
+@media (hover: hover) {
+  .metric:hover {
+    border-color: var(--color-control-rule);
+  }
+  .shortlist-row a:hover strong {
+    color: var(--color-accent);
+  }
+}
+@media (max-width: 759px) {
+  .workspace-heading > .record-actions {
+    justify-content: flex-start;
+  }
+  .panel-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+  .source-disclosure {
+    gap: var(--space-xs) var(--space-md);
+  }
+  .source-disclosure > span {
+    flex-basis: 100%;
+  }
+  .workspace-topbar {
+    position: relative;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reward-bar-track > span {
+    animation: none;
   }
 }

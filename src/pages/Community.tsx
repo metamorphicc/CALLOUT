@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router'
 import type { FormEvent } from 'react'
 import { validateNomination } from '../features/nomination'
 import { reviewUrl } from '../lib/catalog'
@@ -6,6 +7,10 @@ import { project } from '../config/project'
 import { ExternalLink, PageHeading } from '../components/WorkspaceUI'
 
 export default function Community() {
+  const [params] = useSearchParams()
+  const suggestedCaller = (params.get('caller') ?? '')
+    .replace(/[^a-zA-Z0-9_]/g, '')
+    .slice(0, 15)
   const [error, setError] = useState('')
   const [field, setField] = useState<string>()
   const [review, setReview] = useState('')
@@ -36,7 +41,7 @@ export default function Community() {
     <>
       <PageHeading
         title="Community desk"
-        description="Bring the original posts. Help keep the Order’s record accurate and useful."
+        description="Propose a caller, add an original signal or help improve a record."
       />
       <div className="content-columns">
         <section className="panel submission-panel">
@@ -60,6 +65,7 @@ export default function Community() {
                 name="handle"
                 maxLength={16}
                 placeholder="@caller"
+                defaultValue={suggestedCaller ? '@' + suggestedCaller : ''}
                 required
                 aria-invalid={field === 'handle'}
                 aria-describedby="submission-feedback"

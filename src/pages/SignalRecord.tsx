@@ -69,14 +69,9 @@ export default function SignalRecord() {
               </p>
             </div>
           </div>
-          <p className="fine-print">
-            The source identifies this caller and token. Publication time has
-            not been independently confirmed. Follow the original post for the
-            complete text and any subsequent updates.
-          </p>
         </article>
         <aside className="panel detail-aside">
-          <h2>Evidence & observations</h2>
+          <h2>Record details</h2>
           <dl>
             <div>
               <dt>Original platform</dt>
@@ -87,15 +82,15 @@ export default function SignalRecord() {
               <dd>See original post</dd>
             </div>
             <div>
-              <dt>Historical price series</dt>
-              <dd>Not recorded</dd>
+              <dt>Added to CALLOUT</dt>
+              <dd>{displayDate(signal.indexedAt)}</dd>
             </div>
           </dl>
-          <p>
-            Price performance is not calculated without timestamped market
-            observations. The caller’s position or displayed P&L is not a
-            follower’s realized return.
-          </p>
+          <ExternalLink
+            href={`https://explorer.solana.com/address/${signal.mint}`}
+          >
+            Open token explorer
+          </ExternalLink>
           <Link className="inline-action" to="/methodology">
             Read the methodology →
           </Link>

@@ -37,7 +37,7 @@ export default function Callers() {
     <>
       <PageHeading
         title="The Marked Ones"
-        description="Explore the callers behind the rewards. Compare the source data and build your own reading list."
+        description="Find a caller, explore their record and compare the numbers."
       />
       <div className="workspace-toolbar">
         <label className="field search-field">
@@ -85,8 +85,8 @@ export default function Callers() {
       </div>
       <SourceNote />
       <p className="fine-print">
-        ¹ Median gain is reproduced from the source’s last-100-callouts
-        statistics. It is not an independently measured return.
+        ¹ Source median across the last 100 callouts, excluding callouts above
+        $500M.
       </p>
     </>
   )

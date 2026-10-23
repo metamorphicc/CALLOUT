@@ -19,6 +19,9 @@ export function Icon({
     | 'community'
     | 'arrow'
     | 'search'
+    | 'compare'
+    | 'copy'
+    | 'download'
 }) {
   const paths = {
     overview: 'M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z',
@@ -30,6 +33,9 @@ export function Icon({
     community: 'M21 11a8 8 0 0 1-8 8H7l-5 3 2-6a8 8 0 1 1 17-5',
     arrow: 'M5 12h14M13 6l6 6-6 6',
     search: 'm21 21-5-5M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0',
+    compare: 'M4 3v18M20 3v18M8 7h8M8 12h8M8 17h8',
+    copy: 'M9 8h12v13H9zM15 8V3H3v13h6',
+    download: 'M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5',
   }
   return (
     <svg
@@ -92,14 +98,11 @@ export function SourceNote() {
   return (
     <div className="source-disclosure">
       <span className="source-symbol">↳</span>
-      <p>
-        Source snapshot · Transcribed {displayDate(leaderboardSource.checkedOn)}
-        . Ranked by Callout Rewards; the reporting period and payout asset are
-        unspecified. Source gains exclude callouts above $500M.{' '}
-        <ExternalLink href={leaderboardSource.url}>
-          Read the original table
-        </ExternalLink>
-      </p>
+      <span>Rewards snapshot · {displayDate(leaderboardSource.checkedOn)}</span>
+      <ExternalLink href={leaderboardSource.url}>Original table</ExternalLink>
+      <Link className="inline-action" to="/methodology">
+        Metric definitions
+      </Link>
     </div>
   )
 }
@@ -214,7 +217,7 @@ export function CallerTable({
               </td>
               <td className="numeric reward-cell">
                 {caller.rewards ? money(caller.rewards.amount) : '—'}
-                <small>Source USD value</small>
+                <small>Recorded USD</small>
               </td>
               <td className="numeric hide-small">
                 {caller.sourceStatistics

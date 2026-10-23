@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation } from 'react-router'
+import { Link, NavLink } from 'react-router'
 import { useRef, useState } from 'react'
 import { Mark } from './Mark'
 import { Icon } from './WorkspaceUI'
@@ -8,6 +8,7 @@ const navigation = [
   { to: '/', label: 'Overview', icon: 'overview' },
   { to: '/callers', label: 'The Marked Ones', icon: 'callers' },
   { to: '/signals', label: 'Signal archive', icon: 'signals' },
+  { to: '/compare', label: 'Compare callers', icon: 'compare' },
   { to: '/saved', label: 'Saved records', icon: 'saved' },
   { to: '/about', label: 'Inside the Order', icon: 'about' },
   { to: '/community', label: 'Community desk', icon: 'community' },
@@ -15,7 +16,6 @@ const navigation = [
 
 export default function Header() {
   const [open, setOpen] = useState(false)
-  const location = useLocation()
   const button = useRef<HTMLButtonElement>(null)
   const { items } = useSaved()
   return (
@@ -59,12 +59,7 @@ export default function Header() {
             <NavLink
               to={item.to}
               end={item.to === '/'}
-              className={({ isActive }) =>
-                isActive ||
-                (item.to === '/callers' && location.pathname === '/compare')
-                  ? 'is-active'
-                  : ''
-              }
+              className={({ isActive }) => (isActive ? 'is-active' : '')}
               key={item.to}
               onClick={() => setOpen(false)}
             >
@@ -88,7 +83,6 @@ export default function Header() {
           <Link to="/methodology" onClick={() => setOpen(false)}>
             Sources & methodology ↗
           </Link>
-          <span>Independent community research</span>
         </div>
       </div>
     </aside>

@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 import { publishedSignals } from '../lib/catalog'
 import { markedCallers } from '../features/marked-ones/data'
 import { PageHeading, SignalCard, EmptyState } from '../components/WorkspaceUI'
@@ -37,7 +37,12 @@ export default function Signals() {
     <>
       <PageHeading
         title="Signal archive"
-        description="Original callouts, linked to their sources. Search the record and follow a thesis back to its author."
+        description="Follow a callout from the caller to the original post."
+        action={
+          <Link className="control" to="/community">
+            Add a callout
+          </Link>
+        }
       />
       <div className="workspace-toolbar">
         <label className="field search-field">
@@ -124,14 +129,10 @@ export default function Signals() {
           action="View all signals"
         />
       )}
-      <div className="source-disclosure">
-        <p>
-          Dates above describe when records were added to this directory.
-          Original publication times and historical price observations are shown
-          only when independently sourced. A listed callout is not an
-          endorsement.
-        </p>
-      </div>
+      <p className="archive-caption">
+        Dates show when a record entered the archive.{' '}
+        <Link to="/methodology">How the archive works ↗</Link>
+      </p>
     </>
   )
 }

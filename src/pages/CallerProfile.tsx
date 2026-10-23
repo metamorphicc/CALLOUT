@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router'
 import { markedCallers, leaderboardSource } from '../features/marked-ones/data'
 import { Portrait } from '../components/Portrait'
-import { publishedSignals, money, count } from '../lib/catalog'
+import { publishedSignals, money, count, displayDate } from '../lib/catalog'
 import {
   ExternalLink,
   SaveButton,
@@ -34,7 +34,7 @@ export default function CallerProfile() {
         <div>
           <span className="source-tag">Source rank #{caller.sourceRank}</span>
           <h1>{caller.displayName}</h1>
-          <p>Callout Rewards · Source profile</p>
+          <p>Rewards snapshot · {displayDate(leaderboardSource.checkedOn)}</p>
         </div>
         <SaveButton id={`caller:${caller.id}`} label={caller.displayName} />
       </div>
@@ -42,22 +42,22 @@ export default function CallerProfile() {
         <div className="metric">
           <span>Callout Rewards</span>
           <strong>{money(caller.rewards?.amount ?? 0)}</strong>
-          <small>USD value in source</small>
+          <small>Recorded USD</small>
         </div>
         <div className="metric">
           <span>Followers</span>
           <strong>{count(stats?.followers ?? 0)}</strong>
-          <small>At source snapshot</small>
+          <small>At the same snapshot</small>
         </div>
         <div className="metric">
           <span>Median gain¹</span>
           <strong>{stats?.medianGainMultiple.toFixed(1)}×</strong>
-          <small>Source statistics</small>
+          <small>Last 100 callouts · source</small>
         </div>
         <div className="metric">
           <span>Average callout cap</span>
           <strong>{money(stats?.averageMarketCapLast100 ?? 0)}</strong>
-          <small>Source statistics</small>
+          <small>Last 100 callouts · source</small>
         </div>
       </div>
       <div className="content-columns">
@@ -76,31 +76,31 @@ export default function CallerProfile() {
             </div>
           ) : (
             <EmptyState
-              title="No callouts indexed"
-              description={`The directory lists ${caller.displayName} from the rewards table. Individual callouts need their own original sources.`}
-              to="/signals"
-              action="Browse the archive"
+              title="Add to the record"
+              description={`Have an original callout from ${caller.displayName}? Link the post to this profile.`}
+              to={`/community?caller=${caller.id}`}
+              action="Contribute a callout"
             />
           )}
         </section>
         <aside className="panel detail-aside">
-          <h2>About this record</h2>
+          <h2>Snapshot details</h2>
           <dl>
             <div>
               <dt>Ranking basis</dt>
               <dd>Callout Rewards</dd>
             </div>
             <div>
-              <dt>Reporting period</dt>
-              <dd>Unspecified by source</dd>
+              <dt>Recorded on</dt>
+              <dd>{displayDate(leaderboardSource.checkedOn)}</dd>
             </div>
             <div>
-              <dt>Identity</dt>
-              <dd>Source display name</dd>
+              <dt>Average source gain</dt>
+              <dd>{stats?.averageGainMultiple.toFixed(1)}×</dd>
             </div>
             <div>
-              <dt>Illustration</dt>
-              <dd>Order character artwork</dd>
+              <dt>Gain sample</dt>
+              <dd>Last 100 callouts · below $500M</dd>
             </div>
           </dl>
           <ExternalLink href={leaderboardSource.url}>
@@ -112,10 +112,6 @@ export default function CallerProfile() {
         </aside>
       </div>
       <SourceNote />
-      <p className="fine-print">
-        ¹ Source statistics exclude callouts above $500M. Illustrations do not
-        establish identity, affiliation or endorsement.
-      </p>
     </>
   )
 }
