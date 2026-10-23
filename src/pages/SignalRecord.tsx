@@ -8,6 +8,7 @@ import {
   SaveButton,
 } from '../components/WorkspaceUI'
 import { Portrait } from '../components/Portrait'
+import { CopyButton } from '../components/RecordActions'
 
 export default function SignalRecord() {
   const { id } = useParams()
@@ -30,7 +31,12 @@ export default function SignalRecord() {
       <PageHeading
         title={`$${signal.symbol}`}
         description={`${signal.tokenName} · Solana`}
-        action={<SaveButton id={`signal:${signal.id}`} label={signal.symbol} />}
+        action={
+          <div className="record-actions">
+            <CopyButton />
+            <SaveButton id={`signal:${signal.id}`} label={signal.symbol} />
+          </div>
+        }
       />
       <div className="content-columns">
         <article className="panel record-body">
@@ -56,6 +62,9 @@ export default function SignalRecord() {
             <div>
               <dt>Mint address</dt>
               <dd className="mint-address">{signal.mint}</dd>
+              <dd>
+                <CopyButton value={signal.mint} label="Copy mint" />
+              </dd>
             </div>
           </dl>
           <h2>Record history</h2>

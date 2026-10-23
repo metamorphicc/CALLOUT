@@ -1,6 +1,7 @@
 import { markedCallers } from '../features/marked-ones/data'
 import { publishedSignals } from '../lib/catalog'
 import { useSaved } from '../lib/saved-context'
+import { DownloadButton } from '../components/RecordActions'
 import {
   CallerTable,
   EmptyState,
@@ -16,11 +17,42 @@ export default function Saved() {
   const signals = publishedSignals.filter((signal) =>
     items.includes(`signal:${signal.id}`),
   )
+  const rows = [
+    [
+      'Type',
+      'Name',
+      'Caller',
+      'Recorded rewards USD',
+      'Mint',
+      'Original source',
+    ],
+    ...callers.map((caller) => [
+      'Caller',
+      caller.displayName,
+      caller.displayName,
+      Number(caller.rewards?.amount ?? 0),
+      '',
+      caller.rewards?.sourceUrl ?? '',
+    ]),
+    ...signals.map((signal) => [
+      'Signal',
+      signal.symbol,
+      signal.callerId,
+      '',
+      signal.mint,
+      signal.sourceUrl,
+    ]),
+  ]
   return (
     <>
       <PageHeading
         title="Your reading list"
         description="Callers and original signals you want to revisit. Saved privately in this browser, with no account required."
+        action={
+          items.length > 0 ? (
+            <DownloadButton rows={rows} filename="callout-shortlist.csv" />
+          ) : undefined
+        }
       />
       {!items.length && (
         <EmptyState

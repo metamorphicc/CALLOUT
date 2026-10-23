@@ -1472,3 +1472,75 @@ dd {
     animation: none;
   }
 }
+
+.copy-action,
+.download-action {
+  min-width: 0;
+  position: relative;
+}
+.copy-action > .control {
+  min-width: 118px;
+}
+.copy-fallback {
+  display: grid;
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
+  font-size: var(--text-label);
+  color: var(--color-muted);
+}
+.copy-fallback input {
+  width: 100%;
+  min-width: 0;
+  padding: var(--space-xs);
+  background: var(--color-paper);
+  border: var(--rule-width) solid var(--color-control-rule);
+  border-radius: var(--radius-small);
+}
+.action-feedback {
+  display: block;
+  font-size: var(--text-label);
+  color: var(--color-accent);
+  max-width: 25ch;
+}
+.action-feedback:empty {
+  display: none;
+}
+.profile-heading > .record-actions {
+  margin-left: auto;
+}
+.comparison-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+.comparison-toolbar > p {
+  color: var(--color-muted);
+  font-size: var(--text-small);
+}
+.comparison-select {
+  margin-bottom: var(--space-lg);
+}
+.comparison-select select {
+  width: 100%;
+}
+.comparison-remove {
+  margin-top: var(--space-lg);
+}
+.comparison-profile {
+  position: relative;
+}
+@media (max-width: 759px) {
+  .profile-heading > .record-actions {
+    width: 100%;
+    margin-left: 0;
+  }
+  .record-actions {
+    gap: var(--space-xs);
+  }
+  .copy-action:has(.copy-fallback) {
+    flex-basis: 100%;
+  }
+}

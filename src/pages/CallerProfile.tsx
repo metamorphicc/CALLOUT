@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router'
 import { markedCallers, leaderboardSource } from '../features/marked-ones/data'
 import { Portrait } from '../components/Portrait'
+import { CopyButton } from '../components/RecordActions'
 import { publishedSignals, money, count, displayDate } from '../lib/catalog'
 import {
   ExternalLink,
@@ -36,7 +37,10 @@ export default function CallerProfile() {
           <h1>{caller.displayName}</h1>
           <p>Rewards snapshot · {displayDate(leaderboardSource.checkedOn)}</p>
         </div>
-        <SaveButton id={`caller:${caller.id}`} label={caller.displayName} />
+        <div className="record-actions">
+          <CopyButton />
+          <SaveButton id={`caller:${caller.id}`} label={caller.displayName} />
+        </div>
       </div>
       <div className="metric-grid">
         <div className="metric">
