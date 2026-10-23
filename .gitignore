@@ -2,6 +2,7 @@ node_modules/
 dist/
 artifacts/qa/
 artifacts/promo/
+artifacts/promo-montage/
 *.local
 .env
 .env.*
