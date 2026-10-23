@@ -1,98 +1,96 @@
-import { Arrow, Mark } from './Mark'
+import { Link, NavLink, useLocation } from 'react-router'
 import { useRef, useState } from 'react'
+import { Mark } from './Mark'
+import { Icon } from './WorkspaceUI'
+import { useSaved } from '../lib/saved-context'
+
+const navigation = [
+  { to: '/', label: 'Overview', icon: 'overview' },
+  { to: '/callers', label: 'The Marked Ones', icon: 'callers' },
+  { to: '/signals', label: 'Signal archive', icon: 'signals' },
+  { to: '/saved', label: 'Saved records', icon: 'saved' },
+  { to: '/about', label: 'Inside the Order', icon: 'about' },
+  { to: '/community', label: 'Community desk', icon: 'community' },
+] as const
 
 export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const menuButton = useRef<HTMLButtonElement>(null)
+  const [open, setOpen] = useState(false)
+  const location = useLocation()
+  const button = useRef<HTMLButtonElement>(null)
+  const { items } = useSaved()
   return (
-    <header
-      className="site-header"
+    <aside
+      className={`workspace-sidebar ${open ? 'menu-is-open' : ''}`}
       onKeyDown={(event) => {
-        if (event.key === 'Escape' && menuOpen) {
-          setMenuOpen(false)
-          menuButton.current?.focus()
+        if (event.key === 'Escape') {
+          setOpen(false)
+          button.current?.focus()
         }
       }}
     >
-      <div className="container header-inner">
-        <a
-          className="wordmark"
-          href="#hero"
+      <div className="sidebar-brand">
+        <Link
+          className="workspace-wordmark"
+          to="/"
+          onClick={() => setOpen(false)}
           aria-label="The Callout Order home"
         >
           <Mark />
           <span>
-            CALLOUT<span>ORDER</span>
+            CALLOUT<small>THE ORDER</small>
           </span>
-        </a>
-        <nav className="desktop-nav" aria-label="Main navigation">
-          <a href="#marked-ones">The Marked Ones</a>
-          <a href="#signal-archive">Archive</a>
-          <a href="#lore">The Lore</a>
-          <a href="#token">$CALLOUT</a>
-          <a href="#genesis">Genesis</a>
+        </Link>
+        <button
+          className="mobile-menu-button"
+          ref={button}
+          type="button"
+          aria-label={open ? 'Close navigation' : 'Open navigation'}
+          aria-expanded={open}
+          aria-controls="workspace-navigation"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? '×' : '☰'}
+        </button>
+      </div>
+      <div className="sidebar-navigation" id="workspace-navigation">
+        <p className="navigation-label">Research workspace</p>
+        <nav aria-label="Main navigation">
+          {navigation.map((item) => (
+            <NavLink
+              to={item.to}
+              end={item.to === '/'}
+              className={({ isActive }) =>
+                isActive ||
+                (item.to === '/callers' && location.pathname === '/compare')
+                  ? 'is-active'
+                  : ''
+              }
+              key={item.to}
+              onClick={() => setOpen(false)}
+            >
+              <Icon name={item.icon} />
+              <span>{item.label}</span>
+              {item.to === '/saved' && items.length > 0 && (
+                <small className="nav-count">{items.length}</small>
+              )}
+            </NavLink>
+          ))}
         </nav>
-        <div className="header-actions">
-          <a
-            className="button button--small button--ink"
-            href="#join"
-            onClick={() => setMenuOpen(false)}
-          >
-            Join<span className="join-long-label"> the Order</span>{' '}
-            <Arrow diagonal />
-          </a>
-          <button
-            ref={menuButton}
-            className="menu-toggle"
-            type="button"
-            aria-expanded={menuOpen}
-            aria-controls="mobile-navigation"
-            aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? (
-              <span aria-hidden="true">×</span>
-            ) : (
-              <svg
-                viewBox="0 0 24 24"
-                width="20"
-                height="20"
-                aria-hidden="true"
-              >
-                <path
-                  d="M4 7h16M4 12h16M4 17h16"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-              </svg>
-            )}
-          </button>
+        <div className="sidebar-bottom">
+          <div className="sidebar-seal">
+            <Mark />
+            <p>
+              Every signal
+              <br />
+              <strong>leaves a mark.</strong>
+            </p>
+          </div>
+          <Link to="/methodology" onClick={() => setOpen(false)}>
+            Sources & methodology ↗
+          </Link>
+          <span>Independent community research</span>
         </div>
       </div>
-      <nav
-        className="mobile-nav"
-        id="mobile-navigation"
-        aria-label="Mobile navigation"
-        hidden={!menuOpen}
-      >
-        {[
-          { label: 'The Marked Ones', id: 'marked-ones' },
-          { label: 'The Signal Archive', id: 'signal-archive' },
-          { label: 'The Lore', id: 'lore' },
-          { label: '$CALLOUT', id: 'token' },
-          { label: 'Genesis Collection', id: 'genesis' },
-          { label: 'Join the Order', id: 'join' },
-        ].map((item) => (
-          <a
-            key={item.id}
-            href={`#${item.id}`}
-            onClick={() => setMenuOpen(false)}
-          >
-            {item.label}
-            <Arrow diagonal />
-          </a>
-        ))}
-      </nav>
-    </header>
+    </aside>
   )
 }
