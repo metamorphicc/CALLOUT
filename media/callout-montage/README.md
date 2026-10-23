@@ -32,8 +32,11 @@ AICB was attempted through `aicb_whoami` and the `world` playbook. Both returned
 npm ci
 npm run montage:stills
 npm run montage:render
+npm run montage:verify
 ```
 
 Generated MP4, self-contained HTML player, original WAV score, poster, review frames and verification reports go to `artifacts/promo-montage/`, which is excluded from Git. The HTML embeds the same animation, captured screens, project artwork, fonts and music. It works offline and includes play, pause, replay, seek and sound controls. Browser sound begins only after a user action.
 
 `film.mjs` is the shared deterministic composition used by both HTML and MP4. `render.mjs` streams its frames to the bundled FFmpeg binary. The score is original synthesis; no audio or artwork is extracted from the reference video. `post.md` contains the accompanying X copy. Nothing is published automatically.
+
+See `verification.md` for the final media and browser checks. `montage:verify` decodes the finished MP4 for sampled frame uniqueness, stereo audio peaks, the closing fade and encoded scene stills. It requires an existing render.
