@@ -12,6 +12,8 @@
     "preview": "vite preview --host 127.0.0.1",
     "promo:render": "node media/callout-terminal/render.mjs",
     "promo:stills": "node media/callout-terminal/render.mjs --stills",
+    "montage:render": "node media/callout-montage/render.mjs",
+    "montage:stills": "node media/callout-montage/render.mjs --stills",
     "typecheck": "tsc -b --pretty",
     "test": "node --test tests/*.test.mjs",
     "lint": "eslint .",
