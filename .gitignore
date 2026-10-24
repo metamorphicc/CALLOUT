@@ -2,8 +2,6 @@ node_modules/
 dist/
 .vercel/
 artifacts/qa/
-artifacts/promo/
-artifacts/promo-montage/
 *.local
 .env
 .env.*
